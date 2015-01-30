@@ -14,6 +14,8 @@
 		1F6D29291A77CE1700276300 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6D29281A77CE1700276300 /* Images.xcassets */; };
 		1F6D292C1A77CE1700276300 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6D292A1A77CE1700276300 /* LaunchScreen.xib */; };
 		1F6D29381A77CE1700276300 /* RunJournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29371A77CE1700276300 /* RunJournalTests.swift */; };
+		1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29411A77D4FD00276300 /* ContextViewController.swift */; };
+		1F6D29441A7B960C00276300 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29431A7B960C00276300 /* Run.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		1F6D29311A77CE1700276300 /* RunJournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunJournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6D29361A77CE1700276300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6D29371A77CE1700276300 /* RunJournalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunJournalTests.swift; sourceTree = "<group>"; };
+		1F6D29411A77D4FD00276300 /* ContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextViewController.swift; sourceTree = "<group>"; };
+		1F6D29431A7B960C00276300 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +89,9 @@
 				1F6D29281A77CE1700276300 /* Images.xcassets */,
 				1F6D292A1A77CE1700276300 /* LaunchScreen.xib */,
 				1F6D29201A77CE1700276300 /* RunJournal.xcdatamodeld */,
+				1F6D29431A7B960C00276300 /* Run.swift */,
 				1F6D291C1A77CE1700276300 /* Supporting Files */,
+				1F6D29411A77D4FD00276300 /* ContextViewController.swift */,
 			);
 			path = RunJournal;
 			sourceTree = "<group>";
@@ -217,6 +223,8 @@
 			files = (
 				1F6D29241A77CE1700276300 /* ViewController.swift in Sources */,
 				1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */,
+				1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */,
+				1F6D29441A7B960C00276300 /* Run.swift in Sources */,
 				1F6D29221A77CE1700276300 /* RunJournal.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
