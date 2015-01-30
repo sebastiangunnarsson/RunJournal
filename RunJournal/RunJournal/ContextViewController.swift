@@ -115,7 +115,7 @@ class ContextViewController: UIViewController {
     }
     
     // Hämtar alla löpturer för idag
-    func getPreviouslyScheduledRuns() -> [Run] {
+    func getTodaysScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         
         var result = [Run]()
