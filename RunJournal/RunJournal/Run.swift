@@ -16,6 +16,7 @@ class Run: NSManagedObject {
     @NSManaged var isCompleted: NSNumber
     @NSManaged var length: NSNumber
     @NSManaged var name: String
+    @NSManaged var image: NSData
     
 
     
@@ -25,10 +26,10 @@ class Run: NSManagedObject {
         return calendar?.isDateInToday(date)
     }
     
-    /*func GetImage() -> UIImage? {
-    if(image.length == 0) {
-    return nil
+    func GetImage() -> UIImage? {
+        if(image.length == 0) {
+            return nil
+        }
+        return UIImage(data: image)
     }
-    return UIImage(data: image)
-    }*/
 }

@@ -32,8 +32,8 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     @IBAction func addClick(sender: AnyObject) {
         if(!nameTextField.text.isEmpty) {
             var length:NSString = lengthTextView.text
-            //var imageData = thumbnailImageView.image == nil ? nil : UIImagePNGRepresentation(thumbnailImageView.image)
-            addRun(nameTextField.text, length: length.doubleValue, date: datePicker.date, isCompleted: false)
+            var imageData = thumbnailImageView.image == nil ? nil : UIImagePNGRepresentation(thumbnailImageView.image)
+            addRun(nameTextField.text, length: length.doubleValue, date: datePicker.date, isCompleted: false, image: imageData)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

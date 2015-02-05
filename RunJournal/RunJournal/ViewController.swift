@@ -17,6 +17,10 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        runs = getEntities("Run") as [Run]
+    }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return runs!.count
@@ -29,6 +33,9 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
         
         cell.nameLabel.text = run.name
         cell.dateLabel.text = NSDateFormatter.localizedStringFromDate(run.date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+        if(run.image.length > 0) {
+            cell.thumbnailImageView.image = run.GetImage()
+        }
         
         return cell
     }

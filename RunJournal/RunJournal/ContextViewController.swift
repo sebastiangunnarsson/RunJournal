@@ -27,6 +27,7 @@ class ContextViewController: UIViewController {
         runs = getEntities("Run") as [Run]
     }
     
+    
     // Hämtar ett objekt genom dess id.
     // ID:t från en löptur får man genom följande, givet att man har en löptur
     // getRunByObjectId ( myRunObject.objectId )
@@ -65,7 +66,7 @@ class ContextViewController: UIViewController {
     }
     
     // Lägger till en löptur med givna parametrar (Och sparar dessa i CoreData efteråt)
-    func addRun(name:String, length:Double, date:NSDate, isCompleted:Bool) {
+    func addRun(name:String, length:Double, date:NSDate, isCompleted:Bool, image:NSData) {
         
         let entity = NSEntityDescription.entityForName("Run", inManagedObjectContext: manageContext)
         let item = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: manageContext) as Run
@@ -73,7 +74,7 @@ class ContextViewController: UIViewController {
         item.name = name
         item.length = length
         item.isCompleted = isCompleted
-        //item.image = image
+        item.image = image
         runs?.append(item)
         
         saveEntities()

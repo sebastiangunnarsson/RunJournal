@@ -47,7 +47,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="yvr-oD-NwR" id="IS0-Dl-2eH"/>
                                             <outlet property="nameLabel" destination="RHu-Ve-Sgf" id="JBm-I9-HEg"/>
-                                            <outlet property="thumbnailImageView" destination="K7r-wm-1XC" id="wbe-dm-Qid"/>
+                                            <outlet property="thumbnailImageView" destination="rAU-w7-Dw8" id="5Ql-4T-wCp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
