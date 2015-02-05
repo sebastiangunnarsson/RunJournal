@@ -73,6 +73,7 @@ class ContextViewController: UIViewController {
         item.name = name
         item.length = length
         item.isCompleted = isCompleted
+        //item.image = image
         runs?.append(item)
         
         saveEntities()
