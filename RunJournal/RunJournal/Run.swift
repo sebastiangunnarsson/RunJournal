@@ -16,7 +16,7 @@ class Run: NSManagedObject {
     @NSManaged var isCompleted: NSNumber
     @NSManaged var length: NSNumber
     @NSManaged var name: String
-    @NSManaged var image: NSData
+    @NSManaged var image: NSData?
     
 
     
@@ -27,9 +27,9 @@ class Run: NSManagedObject {
     }
     
     func GetImage() -> UIImage? {
-        if(image.length == 0) {
+        if(image == nil) {
             return nil
         }
-        return UIImage(data: image)
+        return UIImage(data: image!)
     }
 }

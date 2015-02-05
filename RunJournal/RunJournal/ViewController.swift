@@ -33,7 +33,7 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
         
         cell.nameLabel.text = run.name
         cell.dateLabel.text = NSDateFormatter.localizedStringFromDate(run.date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
-        if(run.image.length > 0) {
+        if(run.image != nil) {
             cell.thumbnailImageView.image = run.GetImage()
         }
         

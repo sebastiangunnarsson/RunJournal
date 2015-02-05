@@ -66,7 +66,7 @@ class ContextViewController: UIViewController {
     }
     
     // Lägger till en löptur med givna parametrar (Och sparar dessa i CoreData efteråt)
-    func addRun(name:String, length:Double, date:NSDate, isCompleted:Bool, image:NSData) {
+    func addRun(name:String, length:Double, date:NSDate, isCompleted:Bool, image:NSData?) {
         
         let entity = NSEntityDescription.entityForName("Run", inManagedObjectContext: manageContext)
         let item = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: manageContext) as Run
