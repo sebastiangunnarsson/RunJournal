@@ -35,6 +35,12 @@ class ContextViewController: UIViewController {
         return manageContext.objectWithID(objectId) as Run
     }
     
+    func deleteRun(run: NSManagedObject) {
+        manageContext.deleteObject(run)
+        saveEntities()
+        runs = getEntities("Run") as [Run]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
