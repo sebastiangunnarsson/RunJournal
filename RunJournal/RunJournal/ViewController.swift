@@ -7,6 +7,7 @@
 //
 
 import UIKit
+var openWeather:OpenWeather = OpenWeather()
 
 class ViewController: ContextViewController, UITableViewDelegate,UITableViewDataSource {
 

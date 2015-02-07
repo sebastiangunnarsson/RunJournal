@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -128,14 +128,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FfT-F0-FcE">
-                                <rect key="frame" x="16" y="148" width="568" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="444851068.91215599">
-                                    <!--2015-02-05 17:44:28 +0000-->
-                                </date>
-                            </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EkF-2Y-yaM">
-                                <rect key="frame" x="231" y="318" width="138" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EkF-2Y-yaM">
+                                <rect key="frame" x="231" y="376" width="138" height="30"/>
                                 <state key="normal" title="Add Related Picture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -143,12 +137,42 @@
                                     <action selector="addPictureClick:" destination="8II-tE-nng" eventType="touchUpInside" id="Qwg-3Y-Hmr"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="taP-Xh-M6j">
-                                <rect key="frame" x="180" y="356" width="240" height="166"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="taP-Xh-M6j">
+                                <rect key="frame" x="180" y="414" width="240" height="166"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="qh9-u5-7L2"/>
                                 </constraints>
                             </imageView>
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FfT-F0-FcE">
+                                <rect key="frame" x="16" y="206" width="568" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="444851068.91215599">
+                                    <!--2015-02-05 17:44:28 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datePickerChange:" destination="8II-tE-nng" eventType="valueChanged" id="0XJ-St-OO8"/>
+                                </connections>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weather:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkO-go-aNF">
+                                <rect key="frame" x="16" y="148" width="72" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37d-gt-MEK">
+                                <rect key="frame" x="89" y="148" width="495" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVl-V6-6BW">
+                                <rect key="frame" x="344" y="148" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="weatherButtonClick:" destination="8II-tE-nng" eventType="touchUpInside" id="3PR-np-qMt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -185,6 +209,7 @@
                         <outlet property="lengthTextView" destination="4nn-q3-HoH" id="wsL-Xx-bTY"/>
                         <outlet property="nameTextField" destination="PWJ-ag-FVb" id="LMa-ME-Km0"/>
                         <outlet property="thumbnailImageView" destination="taP-Xh-M6j" id="l1Y-b1-3yD"/>
+                        <outlet property="weatherDescLabel" destination="37d-gt-MEK" id="gK0-Dl-V9c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ce-2G-VN1" userLabel="First Responder" sceneMemberID="firstResponder"/>

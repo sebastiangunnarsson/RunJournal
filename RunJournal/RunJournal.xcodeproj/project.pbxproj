@@ -10,6 +10,9 @@
 		0F3D67811A83D814008D1E71 /* RunTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67801A83D814008D1E71 /* RunTableCell.swift */; };
 		0F3D67851A83E1DF008D1E71 /* AddRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */; };
 		0F3D67871A83F46A008D1E71 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67861A83F46A008D1E71 /* Run.swift */; };
+		137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3741A8651FD005CF0C3 /* OpenWeather.swift */; };
+		137AE3771A86536A005CF0C3 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3761A86536A005CF0C3 /* JSON.swift */; };
+		137AE3791A865461005CF0C3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3781A865461005CF0C3 /* DataManager.swift */; };
 		1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D291E1A77CE1700276300 /* AppDelegate.swift */; };
 		1F6D29221A77CE1700276300 /* RunJournal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29201A77CE1700276300 /* RunJournal.xcdatamodeld */; };
 		1F6D29241A77CE1700276300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29231A77CE1700276300 /* ViewController.swift */; };
@@ -35,6 +38,9 @@
 		0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRunViewController.swift; sourceTree = "<group>"; };
 		0F3D67861A83F46A008D1E71 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		0F3D67881A83F675008D1E71 /* RunJournal 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RunJournal 2.xcdatamodel"; sourceTree = "<group>"; };
+		137AE3741A8651FD005CF0C3 /* OpenWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeather.swift; sourceTree = "<group>"; };
+		137AE3761A86536A005CF0C3 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		137AE3781A865461005CF0C3 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		1F6D29191A77CE1700276300 /* RunJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6D291D1A77CE1700276300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6D291E1A77CE1700276300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +105,9 @@
 				1F6D29411A77D4FD00276300 /* ContextViewController.swift */,
 				0F3D67801A83D814008D1E71 /* RunTableCell.swift */,
 				0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */,
+				137AE3741A8651FD005CF0C3 /* OpenWeather.swift */,
+				137AE3761A86536A005CF0C3 /* JSON.swift */,
+				137AE3781A865461005CF0C3 /* DataManager.swift */,
 			);
 			path = RunJournal;
 			sourceTree = "<group>";
@@ -177,6 +186,7 @@
 				TargetAttributes = {
 					1F6D29181A77CE1700276300 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = D9Q7TPS3TX;
 					};
 					1F6D29301A77CE1700276300 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -228,12 +238,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				137AE3771A86536A005CF0C3 /* JSON.swift in Sources */,
+				137AE3791A865461005CF0C3 /* DataManager.swift in Sources */,
 				0F3D67811A83D814008D1E71 /* RunTableCell.swift in Sources */,
 				0F3D67851A83E1DF008D1E71 /* AddRunViewController.swift in Sources */,
 				1F6D29241A77CE1700276300 /* ViewController.swift in Sources */,
 				0F3D67871A83F46A008D1E71 /* Run.swift in Sources */,
 				1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */,
 				1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */,
+				137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */,
 				1F6D29221A77CE1700276300 /* RunJournal.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,9 +372,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RunJournal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -369,9 +385,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RunJournal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -9,6 +9,11 @@
 import UIKit
 import MobileCoreServices
 
+extension NSDate {
+    func hoursFrom(date:NSDate) -> Int{
+        return NSCalendar.currentCalendar().components(NSCalendarUnit.CalendarUnitHour, fromDate: date, toDate: self, options: nil).hour
+    }
+}
 
 class AddRunViewController: ContextViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate {
 
@@ -16,18 +21,31 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     @IBOutlet weak var lengthTextView: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var weatherDescLabel: UILabel!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        openWeather.test()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func datePickerChange(sender: AnyObject) {
+        var date = NSDate()
+        
+        var weatherIndex = datePicker.date.hoursFrom(date) / 24
+        
+        if(weatherIndex < 16 && weatherIndex > 0){
+            weatherDescLabel.text =     openWeather.weatherList[weatherIndex].weather["description"]
+        }
+        println(datePicker.date.hoursFrom(date) / 24)
+    }
+    
     
     @IBAction func addClick(sender: AnyObject) {
         if(!nameTextField.text.isEmpty) {
@@ -38,8 +56,11 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         }
     }
     
+    @IBAction func weatherButtonClick(sender: AnyObject) {
+        weatherDescLabel.text = openWeather.weatherList[0].weather["description"]}
     
     @IBAction func cancelClick(sender: AnyObject) {
+        println(openWeather.country)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
