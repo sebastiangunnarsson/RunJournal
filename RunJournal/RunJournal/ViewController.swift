@@ -11,8 +11,38 @@ import UIKit
 class ViewController: ContextViewController, UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+
+    
+    @IBOutlet weak var filterSegment: UISegmentedControl!
+    
+    @IBAction func filterControlSelected(sender: AnyObject) {
+            reloadRuns()
+    }
+    
+    func reloadRuns() {
+        switch(filterSegment.selectedSegmentIndex)
+        {
+        case FilterType.Elapsed.rawValue:
+            runs = getPreviouslyScheduledRuns()
+            break
+        case FilterType.Coming.rawValue:
+            runs = getUpcomingScheduledRuns()
+            break
+        default:
+            runs = getEntities("Run") as [Run]
+            break
+        }
+        self.tableView.reloadData()
+    }
+    
+    enum FilterType: Int {
+        case  Elapsed = 0
+        case Coming = 1
+        case All = 2
+    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
@@ -20,7 +50,9 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-        runs = getEntities("Run") as [Run]
+        
+        reloadRuns()
+        
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

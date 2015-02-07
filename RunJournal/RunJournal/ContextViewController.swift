@@ -87,27 +87,30 @@ class ContextViewController: UIViewController {
         
     }
     
-    // Hämtar alla inkommande löpturer (Imorgon och framåt)
+    // Hämtar alla inkommande löpturer (Idag och framåt)
     func getUpcomingScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
-        
+        runs = getEntities("Run") as [Run]
         var result = [Run]()
         var currentDate = NSDate()
         for(var i = 0; i < runs?.count; i++) {
             var run = runs?[i] as Run
             
-            if( run.date.compare(currentDate) == NSComparisonResult.OrderedDescending) {
-                if( calendar?.isDateInToday(run.date) == false) {
+            if( run.date.compare(currentDate) == NSComparisonResult.OrderedDescending || calendar?.isDateInToday(run.date) == true) {
+                //if( calendar?.isDateInToday(run.date) == false) {
                     result.append( run )
-                }
+               // }
             }
         }
+        
         return result
     }
     
     // Hämtar alla föregående löpturer (Igår och bakåt)
     func getPreviouslyScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+        
+        runs = getEntities("Run") as [Run]
         
         var result = [Run]()
         var currentDate = NSDate()
@@ -125,6 +128,8 @@ class ContextViewController: UIViewController {
     // Hämtar alla löpturer för idag
     func getTodaysScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+        
+        runs = getEntities("Run") as [Run]
         
         var result = [Run]()
         var currentDate = NSDate()

@@ -77,6 +77,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="p60-rq-CQO">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="oNg-0w-GQa">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="2" id="m0f-qE-kAp">
+                                <rect key="frame" x="16" y="7" width="225" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Elapsed"/>
+                                    <segment title="Coming"/>
+                                    <segment title="All"/>
+                                </segments>
+                                <connections>
+                                    <action selector="filterControlSelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="B2U-Dk-nM6"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add New" id="zsl-Yu-Zg4">
                             <connections>
                                 <segue destination="7Om-Ah-KWd" kind="presentation" id="5bc-1a-5k3"/>
@@ -84,6 +98,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="filterSegment" destination="m0f-qE-kAp" id="P0A-CK-WuS"/>
                         <outlet property="tableView" destination="CSJ-jA-tfY" id="vtA-gj-NbI"/>
                     </connections>
                 </viewController>
