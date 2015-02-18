@@ -10,6 +10,7 @@
 		0F3D67811A83D814008D1E71 /* RunTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67801A83D814008D1E71 /* RunTableCell.swift */; };
 		0F3D67851A83E1DF008D1E71 /* AddRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */; };
 		0F3D67871A83F46A008D1E71 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67861A83F46A008D1E71 /* Run.swift */; };
+		1F1EFC6A1A94993600EE6753 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EFC691A94993600EE6753 /* CustomView.swift */; };
 		1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D291E1A77CE1700276300 /* AppDelegate.swift */; };
 		1F6D29221A77CE1700276300 /* RunJournal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29201A77CE1700276300 /* RunJournal.xcdatamodeld */; };
 		1F6D29241A77CE1700276300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29231A77CE1700276300 /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 		0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRunViewController.swift; sourceTree = "<group>"; };
 		0F3D67861A83F46A008D1E71 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		0F3D67881A83F675008D1E71 /* RunJournal 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RunJournal 2.xcdatamodel"; sourceTree = "<group>"; };
+		1F1EFC691A94993600EE6753 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		1F6D29191A77CE1700276300 /* RunJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6D291D1A77CE1700276300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6D291E1A77CE1700276300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				1F6D29411A77D4FD00276300 /* ContextViewController.swift */,
 				0F3D67801A83D814008D1E71 /* RunTableCell.swift */,
 				0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */,
+				1F1EFC691A94993600EE6753 /* CustomView.swift */,
 			);
 			path = RunJournal;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F3D67811A83D814008D1E71 /* RunTableCell.swift in Sources */,
+				1F1EFC6A1A94993600EE6753 /* CustomView.swift in Sources */,
 				0F3D67851A83E1DF008D1E71 /* AddRunViewController.swift in Sources */,
 				1F6D29241A77CE1700276300 /* ViewController.swift in Sources */,
 				0F3D67871A83F46A008D1E71 /* Run.swift in Sources */,

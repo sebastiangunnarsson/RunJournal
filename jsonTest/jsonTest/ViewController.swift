@@ -21,7 +21,7 @@ class ViewController: UIViewController {
             if(granted) && (error == nil) {
                 println("granted")
             
-                /*
+                
                 var event = EKEvent(eventStore: eventStore)
                 event.title = "Test title"
                 event.startDate = NSDate()
@@ -30,12 +30,55 @@ class ViewController: UIViewController {
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 eventStore.saveEvent(event, span: EKSpanThisEvent, error: nil)
                 println("saved event")
-                */
+
                 
                 
             }
         })
         
+        func createReminder() {
+            
+            let reminder = EKReminder(eventStore: appDelegate!.eventStore)
+            
+            reminder.title = reminderText.text
+            reminder.calendar =
+                appDelegate!.eventStore!.defaultCalendarForNewReminders()
+            let date = myDatePicker.date
+            let alarm = EKAlarm(absoluteDate: date)
+            
+            reminder.addAlarm(alarm)
+            
+            var error: NSError?
+            appDelegate!.eventStore!.saveReminder(reminder,
+                commit: true, error: &error)
+            
+            if error != nil {
+                println("Reminder failed with error \(error?.localizedDescription)")
+            }
+        }
+        
+        eventStore.requestAccessToEntityType(EKEntityTypeReminder, completion: {
+            granted, error in
+            if(granted) && (error == nil) {
+                println("granted")
+                
+                
+                let reminder = EKReminder(eventStore: eventStore)
+                
+                reminder.title = "Go to the store and buy milk"
+                reminder.calendar = eventStore.defaultCalendarForNewReminders()
+                
+                
+                var error: NSError?
+                
+                eventStore.saveReminder(reminder, commit: true, error: &error)
+                
+                
+            }
+        })
+
+        
+        /*
         
             // What about Calendar entries?
         var startDate=NSDate().dateByAddingTimeInterval(-60*60*24)
@@ -56,7 +99,7 @@ class ViewController: UIViewController {
                 
             }
         }
-        
+        */
         
     
     }

@@ -17,7 +17,7 @@ class Run: NSManagedObject {
     @NSManaged var length: NSNumber
     @NSManaged var name: String
     @NSManaged var image: NSData?
-    
+    @NSManaged var duration:NSNumber?
 
     
     func IsToday() -> Bool? {
