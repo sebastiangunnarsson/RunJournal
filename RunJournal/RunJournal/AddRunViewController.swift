@@ -78,42 +78,39 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
         self.startLoading()
         
-        nameTextField.resignFirstResponder()
-        durationTextField.resignFirstResponder()
-        lengthTextView.resignFirstResponder()
+        var errs = [String]()
        
-        if(!nameTextField.text.isEmpty) {
-            
-            if(durationTextField.text.isEmpty){
-                showErrorDialog("Duration is required!")
-                stopLoading()
-            }
+        if(nameTextField.text.isEmpty)
+        {
+            errs.append("Name is required")
+        }
+        if(durationTextField.text.isEmpty)
+        {
+            errs.append("Duration is required")
+        }
+        
+        if(errs.count > 0)
+        {
+            stopLoading()
+            showErrorsDialog(errs)
+            return
+        }
             
             var duration:Int = (durationTextField.text as NSString).integerValue
             var length:NSString = lengthTextView.text
             var imageData = thumbnailImageView.image == nil ? nil : UIImagePNGRepresentation(thumbnailImageView.image)
             
             addRunWith(nameTextField.text, length: length.doubleValue, start: datePicker.date, duration: duration, image: imageData)
-        } else {
-            showErrorDialog("Name is required!")
-            stopLoading()
-        }
+        
     }
     
     func createCalendarEventFor(title:String, date:NSDate, notes:String, duration:Int, store:EKEventStore) -> EKEvent {
         
-        let components = getComponentsFromDate(date);
-        let year:Int = components!.year
-        let month:Int = components!.month
-        let day:Int = components!.day
-        let hour:Int = components!.hour
-        let min:Int = components!.minute
         
         // get the start date
-        let startDate = createDate(year, month: month, day: day, hour: hour, minute: min, second: 0)
-        
+        let startDate = date;
         // get the end date by adding the duration
-        let endDate = startDate?.dateByAddingTimeInterval(NSTimeInterval(60*duration))
+        let endDate = startDate.dateByAddingTimeInterval(NSTimeInterval(60*duration))
         
         
         var event = EKEvent(eventStore: store)
@@ -210,6 +207,23 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         dialog.addButtonWithTitle("Ok")
         dialog.show()
     }
+
+//Visar popup för multipla fel
+func showErrorsDialog(messages:[String]){
+    var dialog = UIAlertView()
+    
+    var errormess = ""
+    
+    for mess in messages
+    {
+        errormess += mess + "\n"
+    }
+    dialog.title = errormess
+    dialog.addButtonWithTitle("OK")
+    dialog.show()
+    
+}
+
     
     @IBAction func addPictureClick(sender: AnyObject) {
         var dialog = UIAlertView()
