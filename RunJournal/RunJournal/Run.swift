@@ -11,14 +11,13 @@ import CoreData
 import UIKit
 
 class Run: NSManagedObject {
-
+    
     @NSManaged var date: NSDate
     @NSManaged var isCompleted: NSNumber
     @NSManaged var length: NSNumber
     @NSManaged var name: String
     @NSManaged var image: NSData?
-    
-
+    @NSManaged var locations: NSOrderedSet
     
     func IsToday() -> Bool? {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)

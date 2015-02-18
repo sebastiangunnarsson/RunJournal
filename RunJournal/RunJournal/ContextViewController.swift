@@ -84,7 +84,6 @@ class ContextViewController: UIViewController {
         runs?.append(item)
         
         saveEntities()
-        
     }
     
     // Hämtar alla inkommande löpturer (Idag och framåt)

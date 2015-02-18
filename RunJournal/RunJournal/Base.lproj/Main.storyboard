@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -21,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RunTableCell" rowHeight="84" id="d5T-aj-RkH" customClass="RunTableCell" customModule="RunJournal" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RunTableCell" rowHeight="84" id="d5T-aj-RkH" customClass="RunTableCell" customModule="RunJournal" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d5T-aj-RkH" id="K7r-wm-1XC">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -32,13 +35,13 @@
                                                         <constraint firstAttribute="width" constant="96" id="XAw-T9-p9U"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHu-Ve-Sgf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHu-Ve-Sgf">
                                                     <rect key="frame" x="112" y="8" width="480" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvr-oD-NwR">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvr-oD-NwR">
                                                     <rect key="frame" x="112" y="31" width="480" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -63,6 +66,7 @@
                                             <outlet property="dateLabel" destination="yvr-oD-NwR" id="IS0-Dl-2eH"/>
                                             <outlet property="nameLabel" destination="RHu-Ve-Sgf" id="JBm-I9-HEg"/>
                                             <outlet property="thumbnailImageView" destination="rAU-w7-Dw8" id="5Ql-4T-wCp"/>
+                                            <segue destination="xeU-58-jBQ" kind="push" identifier="runDetail" id="lAV-2V-nIo"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -133,12 +137,18 @@
                                 <date key="date" timeIntervalSinceReferenceDate="444851068.91215599">
                                     <!--2015-02-05 17:44:28 +0000-->
                                 </date>
+                                <variation key="heightClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="16" y="146" width="568" height="162"/>
+                                </variation>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EkF-2Y-yaM">
                                 <rect key="frame" x="231" y="318" width="138" height="30"/>
                                 <state key="normal" title="Add Related Picture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="231" y="314" width="138" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <action selector="addPictureClick:" destination="8II-tE-nng" eventType="touchUpInside" id="Qwg-3Y-Hmr"/>
                                 </connections>
@@ -226,6 +236,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkr-Ko-nUz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1836" y="606"/>
+        </scene>
+        <!--Run details-->
+        <scene sceneID="Kj7-q4-jsw">
+            <objects>
+                <viewController title="Run details" id="xeU-58-jBQ" customClass="RunDetailedController" customModule="RunJournal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZB1-Tc-MxZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="nRK-Cg-7EQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J1X-g9-sQ3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GLG-qB-6pK">
+                                <rect key="frame" x="0.0" y="0.0" width="614" height="600"/>
+                            </mapView>
+                            <button opaque="NO" alpha="0.79999999999999982" contentMode="bottomLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O67-sB-bqL">
+                                <rect key="frame" x="0.0" y="520" width="180" height="60"/>
+                                <color key="backgroundColor" red="0.69818973070420909" green="1" blue="0.74639231995451139" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="Pxn-W5-2Ld"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Start run session">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="startRunClick:" destination="xeU-58-jBQ" eventType="touchUpInside" id="hPM-nQ-IIa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.89999999999999991" contentMode="bottomRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmE-cS-ndN">
+                                <rect key="frame" x="420" y="520" width="180" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.7108197122449198" blue="0.65638438907189656" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="Jq1-cX-6nc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Stop run session">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopRunClick:" destination="xeU-58-jBQ" eventType="touchUpInside" id="ZVw-pP-fTh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GLG-qB-6pK" firstAttribute="top" secondItem="J1X-g9-sQ3" secondAttribute="top" id="AQP-OT-CgP"/>
+                            <constraint firstItem="CmE-cS-ndN" firstAttribute="bottom" secondItem="O67-sB-bqL" secondAttribute="bottom" id="BV6-CR-mrd"/>
+                            <constraint firstItem="GLG-qB-6pK" firstAttribute="leading" secondItem="J1X-g9-sQ3" secondAttribute="leading" id="ERK-5J-0O6"/>
+                            <constraint firstItem="O67-sB-bqL" firstAttribute="baseline" secondItem="CmE-cS-ndN" secondAttribute="firstBaseline" id="MNb-kq-J00"/>
+                            <constraint firstItem="CmE-cS-ndN" firstAttribute="height" secondItem="O67-sB-bqL" secondAttribute="height" id="P62-hE-sNH"/>
+                            <constraint firstItem="CmE-cS-ndN" firstAttribute="baseline" secondItem="O67-sB-bqL" secondAttribute="firstBaseline" id="Rar-HQ-Lx4"/>
+                            <constraint firstItem="CmE-cS-ndN" firstAttribute="bottom" secondItem="nRK-Cg-7EQ" secondAttribute="top" constant="-20" id="VeZ-1u-wR9"/>
+                            <constraint firstItem="O67-sB-bqL" firstAttribute="leading" secondItem="GLG-qB-6pK" secondAttribute="leading" id="Wy0-OP-OBk"/>
+                            <constraint firstAttribute="trailing" secondItem="CmE-cS-ndN" secondAttribute="trailing" id="bHv-hj-7QJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GLG-qB-6pK" secondAttribute="trailing" constant="-30" id="cB5-KG-HWZ"/>
+                            <constraint firstItem="CmE-cS-ndN" firstAttribute="width" secondItem="O67-sB-bqL" secondAttribute="width" id="cvZ-tx-XWP"/>
+                            <constraint firstItem="GLG-qB-6pK" firstAttribute="bottom" secondItem="nRK-Cg-7EQ" secondAttribute="top" id="dTb-3T-L0c"/>
+                            <constraint firstItem="O67-sB-bqL" firstAttribute="top" secondItem="CmE-cS-ndN" secondAttribute="top" id="fnc-mi-MXT"/>
+                            <constraint firstItem="CmE-cS-ndN" firstAttribute="width" secondItem="O67-sB-bqL" secondAttribute="height" multiplier="5:2" constant="30" id="l21-Gq-JPC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nug-D9-fdo"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="GLG-qB-6pK" id="Acs-kl-W5e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XOH-wG-KDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1840" y="1279"/>
         </scene>
     </scenes>
 </document>
