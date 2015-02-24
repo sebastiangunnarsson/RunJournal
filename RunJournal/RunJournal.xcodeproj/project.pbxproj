@@ -13,6 +13,10 @@
 		137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3741A8651FD005CF0C3 /* OpenWeather.swift */; };
 		137AE3771A86536A005CF0C3 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3761A86536A005CF0C3 /* JSON.swift */; };
 		137AE3791A865461005CF0C3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3781A865461005CF0C3 /* DataManager.swift */; };
+		132276821A93ACE000D9FD7A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132276811A93ACE000D9FD7A /* Location.swift */; };
+		13AEF3541A9367C1009594BE /* RunDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEF3531A9367C1009594BE /* RunDetailedController.swift */; };
+		13AEF3561A937351009594BE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AEF3551A937351009594BE /* MapKit.framework */; };
+		13AEF35E1A93A148009594BE /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEF35D1A93A148009594BE /* Run.swift */; };
 		1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D291E1A77CE1700276300 /* AppDelegate.swift */; };
 		1F6D29221A77CE1700276300 /* RunJournal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29201A77CE1700276300 /* RunJournal.xcdatamodeld */; };
 		1F6D29241A77CE1700276300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29231A77CE1700276300 /* ViewController.swift */; };
@@ -40,6 +44,10 @@
 		137AE3741A8651FD005CF0C3 /* OpenWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeather.swift; sourceTree = "<group>"; };
 		137AE3761A86536A005CF0C3 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		137AE3781A865461005CF0C3 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		132276811A93ACE000D9FD7A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = SOURCE_ROOT; };
+		13AEF3531A9367C1009594BE /* RunDetailedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunDetailedController.swift; sourceTree = "<group>"; };
+		13AEF3551A937351009594BE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		13AEF35D1A93A148009594BE /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		1F6D29191A77CE1700276300 /* RunJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6D291D1A77CE1700276300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6D291E1A77CE1700276300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +116,9 @@
 				137AE3741A8651FD005CF0C3 /* OpenWeather.swift */,
 				137AE3761A86536A005CF0C3 /* JSON.swift */,
 				137AE3781A865461005CF0C3 /* DataManager.swift */,
+				13AEF3531A9367C1009594BE /* RunDetailedController.swift */,
+				13AEF35D1A93A148009594BE /* Run.swift */,
+				132276811A93ACE000D9FD7A /* Location.swift */,
 			);
 			path = RunJournal;
 			sourceTree = "<group>";
@@ -187,6 +198,11 @@
 					1F6D29181A77CE1700276300 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = D9Q7TPS3TX;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					1F6D29301A77CE1700276300 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -247,6 +263,8 @@
 				1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */,
 				1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */,
 				137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */,
+				13AEF35E1A93A148009594BE /* Run.swift in Sources */,
+				132276821A93ACE000D9FD7A /* Location.swift in Sources */,
 				1F6D29221A77CE1700276300 /* RunJournal.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
