@@ -22,12 +22,15 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var weatherDescLabel: UILabel!
+    @IBOutlet weak var imageURL: UIImageView!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         openWeather.test()
         // Do any additional setup after loading the view.
+        
+        imageURL.contentMode = UIViewContentMode.ScaleAspectFit
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,7 +44,13 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         var weatherIndex = datePicker.date.hoursFrom(date) / 24
         
         if(weatherIndex < 16 && weatherIndex > 0){
-            weatherDescLabel.text =     openWeather.weatherList[weatherIndex].weather["description"]
+            weatherDescLabel.text =     openWeather.weatherList[weatherIndex].weather["icon"]
+            var iconName = openWeather.weatherList[weatherIndex].weather["icon"]
+
+            
+            if let checkedUrl = NSURL(string: "http://openweathermap.org/img/w/" + iconName! + ".png") {
+                downloadImage(checkedUrl)
+            }
         }
         println(datePicker.date.hoursFrom(date) / 24)
     }
@@ -104,4 +113,26 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
             self.presentViewController(imag, animated: true, completion: nil)
         }
     }
+    
+    
+    
+    
+    
+    /*Image download*/
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: NSData(data: data))
+            }.resume()
+    }
+    
+    func downloadImage(url:NSURL){
+        println("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
+        getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                println("Finished downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
+                self.imageURL.image = UIImage(data: data!)
+            }
+        }
+    }
+    
 }

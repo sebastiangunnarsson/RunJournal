@@ -173,6 +173,9 @@
                                     <action selector="weatherButtonClick:" destination="8II-tE-nng" eventType="touchUpInside" id="3PR-np-qMt"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cG8-Qh-kRs">
+                                <rect key="frame" x="16" y="389" width="102" height="79"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -206,6 +209,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="FfT-F0-FcE" id="scY-nB-PmF"/>
+                        <outlet property="imageURL" destination="cG8-Qh-kRs" id="dKt-hw-dAH"/>
                         <outlet property="lengthTextView" destination="4nn-q3-HoH" id="wsL-Xx-bTY"/>
                         <outlet property="nameTextField" destination="PWJ-ag-FVb" id="LMa-ME-Km0"/>
                         <outlet property="thumbnailImageView" destination="taP-Xh-M6j" id="l1Y-b1-3yD"/>
