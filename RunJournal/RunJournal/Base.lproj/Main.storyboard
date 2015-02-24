@@ -137,8 +137,8 @@
                                     <action selector="addPictureClick:" destination="8II-tE-nng" eventType="touchUpInside" id="Qwg-3Y-Hmr"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="taP-Xh-M6j">
-                                <rect key="frame" x="180" y="414" width="240" height="166"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="taP-Xh-M6j">
+                                <rect key="frame" x="180" y="356" width="240" height="166"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="qh9-u5-7L2"/>
                                 </constraints>
