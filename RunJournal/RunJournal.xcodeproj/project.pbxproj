@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		0F3D67801A83D814008D1E71 /* RunTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunTableCell.swift; sourceTree = "<group>"; };
 		0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRunViewController.swift; sourceTree = "<group>"; };
-		0F3D67861A83F46A008D1E71 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		0F3D67881A83F675008D1E71 /* RunJournal 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RunJournal 2.xcdatamodel"; sourceTree = "<group>"; };
 		137AE3741A8651FD005CF0C3 /* OpenWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeather.swift; sourceTree = "<group>"; };
 		137AE3761A86536A005CF0C3 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13AEF3561A937351009594BE /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +76,7 @@
 		1F6D29101A77CE1700276300 = {
 			isa = PBXGroup;
 			children = (
+				13AEF3551A937351009594BE /* MapKit.framework */,
 				1F6D291B1A77CE1700276300 /* RunJournal */,
 				1F6D29341A77CE1700276300 /* RunJournalTests */,
 				1F6D291A1A77CE1700276300 /* Products */,
@@ -100,7 +101,6 @@
 				1F6D29281A77CE1700276300 /* Images.xcassets */,
 				1F6D292A1A77CE1700276300 /* LaunchScreen.xib */,
 				1F6D29201A77CE1700276300 /* RunJournal.xcdatamodeld */,
-				0F3D67861A83F46A008D1E71 /* Run.swift */,
 				1F6D291C1A77CE1700276300 /* Supporting Files */,
 				1F6D29411A77D4FD00276300 /* ContextViewController.swift */,
 				0F3D67801A83D814008D1E71 /* RunTableCell.swift */,
@@ -243,7 +243,7 @@
 				0F3D67811A83D814008D1E71 /* RunTableCell.swift in Sources */,
 				0F3D67851A83E1DF008D1E71 /* AddRunViewController.swift in Sources */,
 				1F6D29241A77CE1700276300 /* ViewController.swift in Sources */,
-				0F3D67871A83F46A008D1E71 /* Run.swift in Sources */,
+				13AEF3541A9367C1009594BE /* RunDetailedController.swift in Sources */,
 				1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */,
 				1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */,
 				137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */,

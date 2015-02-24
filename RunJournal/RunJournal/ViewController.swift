@@ -87,15 +87,31 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
         if(run.image != nil) {
             cell.thumbnailImageView.image = run.GetImage()
         }
-        
+    
         return cell
     }
     
-    
-    
+    /* Select row in table view.
+     * Displays title detail page.
+     *
+     * Author: Samuel Eklund.
+     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+       // self.performSegueWithIdentifier("runDetail", sender: tableView)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if segue.identifier == "runDetail" {
+            var svc = segue.destinationViewController as RunDetailedController
+            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let destinationTitle = self.runs?[indexPath.row].description
+            
+            svc.runIndexPath = indexPath.row
+           // RunDetailedController = destinationTitle
+            
+        }
+    }
+    
     
 }
 
