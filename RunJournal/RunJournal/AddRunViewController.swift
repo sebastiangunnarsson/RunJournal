@@ -23,12 +23,14 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var weatherDescLabel: UILabel!
     @IBOutlet weak var imageURL: UIImageView!
-
+    @IBOutlet weak var addPictureButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         openWeather.test()
         // Do any additional setup after loading the view.
+        
+        weatherDescLabel.text = ""
         
         imageURL.contentMode = UIViewContentMode.ScaleAspectFit
     }
@@ -43,14 +45,16 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
         var weatherIndex = datePicker.date.hoursFrom(date) / 24
         
-        if(weatherIndex < 16 && weatherIndex > 0){
-            weatherDescLabel.text =     openWeather.weatherList[weatherIndex].weather["icon"]
+        if(weatherIndex < 16 && weatherIndex >= 0){
+            weatherDescLabel.text = openWeather.weatherList[weatherIndex].weather["description"]
             var iconName = openWeather.weatherList[weatherIndex].weather["icon"]
 
             
             if let checkedUrl = NSURL(string: "http://openweathermap.org/img/w/" + iconName! + ".png") {
                 downloadImage(checkedUrl)
             }
+        } else {
+            weatherDescLabel.text = "N/A"
         }
         println(datePicker.date.hoursFrom(date) / 24)
     }
@@ -59,7 +63,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     @IBAction func addClick(sender: AnyObject) {
         if(!nameTextField.text.isEmpty) {
             var length:NSString = lengthTextView.text
-            var imageData = thumbnailImageView.image == nil ? nil : UIImagePNGRepresentation(thumbnailImageView.image)
+            var imageData = thumbnailImageView.image == nil ? nil : UIImageJPEGRepresentation(thumbnailImageView.image, 0.0)
             addRun(nameTextField.text, length: length.doubleValue, date: datePicker.date, isCompleted: false, image: imageData)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -74,13 +78,19 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     }
     
     @IBAction func addPictureClick(sender: AnyObject) {
-        var dialog = UIAlertView()
-        dialog.delegate = self
-        dialog.message = "Take a new photo or select an existing from your library."
-        dialog.addButtonWithTitle("Camera")
-        dialog.addButtonWithTitle("Photo Library")
-        dialog.title = "Select photo"
-        dialog.show()
+        if(thumbnailImageView.image == nil) {
+            var dialog = UIAlertView()
+            dialog.delegate = self
+            dialog.message = "Take a new photo or select an existing from your library."
+            dialog.addButtonWithTitle("Camera")
+            dialog.addButtonWithTitle("Photo Library")
+            dialog.addButtonWithTitle("Cancel")
+            dialog.title = "Select photo"
+            dialog.show()
+        } else {
+            thumbnailImageView.image = nil
+            addPictureButton.setTitle("Add Related Picture", forState: UIControlState.Normal)
+        }
     }
     
     func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
@@ -97,8 +107,8 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     }
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
-        
         thumbnailImageView.image = image
+        addPictureButton.setTitle("Remove Picture", forState: UIControlState.Normal)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
