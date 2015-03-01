@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class RunDetailedController: ContextViewController, CLLocationManagerDelegate, MKMapViewDelegate{
+class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -18,7 +18,7 @@ class RunDetailedController: ContextViewController, CLLocationManagerDelegate, M
     var myLocations: [CLLocation] = []
     var oldLocation:CLLocation!;
     var totalDistane:Double = 0;
-    var runIndexPath:Int!
+    var objId:NSManagedObjectID?
     
     var allRuns:[Run]!
     var run:Run!
@@ -33,7 +33,8 @@ class RunDetailedController: ContextViewController, CLLocationManagerDelegate, M
         createLocationManager()
         
         allRuns = getEntities("Run") as [Run]
-        run = allRuns[runIndexPath]
+        run = getRunByObjectId(objId!)
+        
       //  println("Locations \(run.locations)")
         
         var i = 0

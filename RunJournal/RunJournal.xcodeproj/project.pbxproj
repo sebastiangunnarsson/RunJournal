@@ -9,12 +9,11 @@
 /* Begin PBXBuildFile section */
 		0F3D67811A83D814008D1E71 /* RunTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67801A83D814008D1E71 /* RunTableCell.swift */; };
 		0F3D67851A83E1DF008D1E71 /* AddRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */; };
-		0F3D67871A83F46A008D1E71 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D67861A83F46A008D1E71 /* Run.swift */; };
+		132276821A93ACE000D9FD7A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132276811A93ACE000D9FD7A /* Location.swift */; };
 		137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3741A8651FD005CF0C3 /* OpenWeather.swift */; };
 		137AE3771A86536A005CF0C3 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3761A86536A005CF0C3 /* JSON.swift */; };
 		137AE3791A865461005CF0C3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AE3781A865461005CF0C3 /* DataManager.swift */; };
-		132276821A93ACE000D9FD7A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132276811A93ACE000D9FD7A /* Location.swift */; };
-		13AEF3541A9367C1009594BE /* RunDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEF3531A9367C1009594BE /* RunDetailedController.swift */; };
+		13AEF3541A9367C1009594BE /* RunMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEF3531A9367C1009594BE /* RunMapController.swift */; };
 		13AEF3561A937351009594BE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AEF3551A937351009594BE /* MapKit.framework */; };
 		13AEF35E1A93A148009594BE /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEF35D1A93A148009594BE /* Run.swift */; };
 		1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D291E1A77CE1700276300 /* AppDelegate.swift */; };
@@ -25,6 +24,8 @@
 		1F6D292C1A77CE1700276300 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6D292A1A77CE1700276300 /* LaunchScreen.xib */; };
 		1F6D29381A77CE1700276300 /* RunJournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29371A77CE1700276300 /* RunJournalTests.swift */; };
 		1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29411A77D4FD00276300 /* ContextViewController.swift */; };
+		1F7F7B2F1AA1DA2B001293AD /* RunDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7F7B2E1AA1DA2B001293AD /* RunDetailsViewController.swift */; };
+		1FF1634E1A9F713C00528371 /* CustomUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF1634D1A9F713C00528371 /* CustomUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,11 +42,11 @@
 		0F3D67801A83D814008D1E71 /* RunTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunTableCell.swift; sourceTree = "<group>"; };
 		0F3D67841A83E1DF008D1E71 /* AddRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRunViewController.swift; sourceTree = "<group>"; };
 		0F3D67881A83F675008D1E71 /* RunJournal 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RunJournal 2.xcdatamodel"; sourceTree = "<group>"; };
+		132276811A93ACE000D9FD7A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = SOURCE_ROOT; };
 		137AE3741A8651FD005CF0C3 /* OpenWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenWeather.swift; sourceTree = "<group>"; };
 		137AE3761A86536A005CF0C3 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		137AE3781A865461005CF0C3 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		132276811A93ACE000D9FD7A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = SOURCE_ROOT; };
-		13AEF3531A9367C1009594BE /* RunDetailedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunDetailedController.swift; sourceTree = "<group>"; };
+		13AEF3531A9367C1009594BE /* RunMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunMapController.swift; sourceTree = "<group>"; };
 		13AEF3551A937351009594BE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		13AEF35D1A93A148009594BE /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		1F6D29191A77CE1700276300 /* RunJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +61,8 @@
 		1F6D29361A77CE1700276300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6D29371A77CE1700276300 /* RunJournalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunJournalTests.swift; sourceTree = "<group>"; };
 		1F6D29411A77D4FD00276300 /* ContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextViewController.swift; sourceTree = "<group>"; };
+		1F7F7B2E1AA1DA2B001293AD /* RunDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunDetailsViewController.swift; sourceTree = "<group>"; };
+		1FF1634D1A9F713C00528371 /* CustomUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,9 +119,11 @@
 				137AE3741A8651FD005CF0C3 /* OpenWeather.swift */,
 				137AE3761A86536A005CF0C3 /* JSON.swift */,
 				137AE3781A865461005CF0C3 /* DataManager.swift */,
-				13AEF3531A9367C1009594BE /* RunDetailedController.swift */,
+				13AEF3531A9367C1009594BE /* RunMapController.swift */,
 				13AEF35D1A93A148009594BE /* Run.swift */,
 				132276811A93ACE000D9FD7A /* Location.swift */,
+				1FF1634D1A9F713C00528371 /* CustomUIView.swift */,
+				1F7F7B2E1AA1DA2B001293AD /* RunDetailsViewController.swift */,
 			);
 			path = RunJournal;
 			sourceTree = "<group>";
@@ -257,9 +262,11 @@
 				137AE3771A86536A005CF0C3 /* JSON.swift in Sources */,
 				137AE3791A865461005CF0C3 /* DataManager.swift in Sources */,
 				0F3D67811A83D814008D1E71 /* RunTableCell.swift in Sources */,
+				1F7F7B2F1AA1DA2B001293AD /* RunDetailsViewController.swift in Sources */,
 				0F3D67851A83E1DF008D1E71 /* AddRunViewController.swift in Sources */,
 				1F6D29241A77CE1700276300 /* ViewController.swift in Sources */,
-				13AEF3541A9367C1009594BE /* RunDetailedController.swift in Sources */,
+				1FF1634E1A9F713C00528371 /* CustomUIView.swift in Sources */,
+				13AEF3541A9367C1009594BE /* RunMapController.swift in Sources */,
 				1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */,
 				1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */,
 				137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */,

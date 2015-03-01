@@ -97,19 +97,19 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
      * Author: Samuel Eklund.
      */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       // self.performSegueWithIdentifier("runDetail", sender: tableView)
+        //self.performSegueWithIdentifier("runDetail", sender: tableView)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == "runDetail" {
-            var svc = segue.destinationViewController as RunDetailedController
-            let indexPath = self.tableView.indexPathForSelectedRow()!
-            let destinationTitle = self.runs?[indexPath.row].description
-            
-            svc.runIndexPath = indexPath.row
-           // RunDetailedController = destinationTitle
-            
+        
+        if(segue.identifier ==  "runDetail") {
+            var dvc = segue.destinationViewController as RunDetailsViewController
+            var indexRow = self.tableView.indexPathForSelectedRow()?.row
+            var objId = runs?[indexRow!].objectID
+            dvc.objId = objId
         }
+        //var x = runs![indexRow!].objectID
+        
     }
     
     
