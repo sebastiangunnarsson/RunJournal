@@ -86,6 +86,8 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
         cell.dateLabel.text = NSDateFormatter.localizedStringFromDate(run.date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
         if(run.image != nil) {
             cell.thumbnailImageView.image = run.GetImage()
+        } else {
+            cell.thumbnailImageView.image = nil
         }
     
         return cell

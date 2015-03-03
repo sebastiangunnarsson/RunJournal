@@ -116,7 +116,8 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
         var duration:Int = (durationTextField.text as NSString).integerValue
         var length:NSString = lengthTextView.text
-        var imageData = thumbnailImageView.image == nil ? nil : UIImagePNGRepresentation(thumbnailImageView.image)
+        var imageData = thumbnailImageView.image == nil ? nil : UIImageJPEGRepresentation(thumbnailImageView.image, 0.1)
+        
         
         addRunWith(nameTextField.text, length: length.doubleValue, start: datePicker.date, duration: duration, image: imageData)
     }
