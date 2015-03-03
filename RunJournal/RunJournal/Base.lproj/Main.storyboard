@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -361,14 +359,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GLG-qB-6pK">
-                                <rect key="frame" x="0.0" y="0.0" width="614" height="600"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GLG-qB-6pK">
+                                <rect key="frame" x="0.0" y="65" width="614" height="536"/>
                             </mapView>
+                            <navigationBar contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="0v1-T7-jmY">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Run Session" id="CKc-9e-rzj">
+                                        <barButtonItem key="leftBarButtonItem" title="Run Details" id="r1p-pg-OMM">
+                                            <connections>
+                                                <action selector="onRunDetailsClick:" destination="xeU-58-jBQ" id="YSc-2P-cNa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <button opaque="NO" alpha="0.79999999999999982" contentMode="bottomLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O67-sB-bqL">
-                                <rect key="frame" x="0.0" y="520" width="180" height="60"/>
-                                <color key="backgroundColor" red="0.69818973070420909" green="1" blue="0.74639231995451139" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="185" y="505" width="230" height="75"/>
+                                <color key="backgroundColor" red="0.69818973070000001" green="1" blue="0.74639232" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="Pxn-W5-2Ld"/>
+                                    <constraint firstAttribute="height" constant="75" id="OAa-mJ-Fld"/>
+                                    <constraint firstAttribute="width" constant="230" id="Pxn-W5-2Ld"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="jPu-PS-Ynd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Start run session">
@@ -378,48 +395,30 @@
                                     <action selector="startRunClick:" destination="xeU-58-jBQ" eventType="touchUpInside" id="hPM-nQ-IIa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.89999999999999991" contentMode="bottomRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmE-cS-ndN">
-                                <rect key="frame" x="420" y="520" width="180" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.7108197122449198" blue="0.65638438907189656" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="Jq1-cX-6nc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Stop run session">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="stopRunClick:" destination="xeU-58-jBQ" eventType="touchUpInside" id="ZVw-pP-fTh"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GLG-qB-6pK" firstAttribute="top" secondItem="J1X-g9-sQ3" secondAttribute="top" id="AQP-OT-CgP"/>
-                            <constraint firstItem="CmE-cS-ndN" firstAttribute="bottom" secondItem="O67-sB-bqL" secondAttribute="bottom" id="BV6-CR-mrd"/>
+                            <constraint firstAttribute="centerX" secondItem="O67-sB-bqL" secondAttribute="centerX" id="71g-Gw-6qH"/>
+                            <constraint firstItem="0v1-T7-jmY" firstAttribute="top" secondItem="ZB1-Tc-MxZ" secondAttribute="bottom" id="A2z-qq-PXg"/>
                             <constraint firstItem="GLG-qB-6pK" firstAttribute="leading" secondItem="J1X-g9-sQ3" secondAttribute="leading" id="ERK-5J-0O6"/>
-                            <constraint firstItem="O67-sB-bqL" firstAttribute="baseline" secondItem="CmE-cS-ndN" secondAttribute="firstBaseline" id="MNb-kq-J00"/>
-                            <constraint firstItem="CmE-cS-ndN" firstAttribute="height" secondItem="O67-sB-bqL" secondAttribute="height" id="P62-hE-sNH"/>
-                            <constraint firstItem="CmE-cS-ndN" firstAttribute="baseline" secondItem="O67-sB-bqL" secondAttribute="firstBaseline" id="Rar-HQ-Lx4"/>
-                            <constraint firstItem="CmE-cS-ndN" firstAttribute="bottom" secondItem="nRK-Cg-7EQ" secondAttribute="top" constant="-20" id="VeZ-1u-wR9"/>
-                            <constraint firstItem="O67-sB-bqL" firstAttribute="leading" secondItem="GLG-qB-6pK" secondAttribute="leading" id="Wy0-OP-OBk"/>
-                            <constraint firstAttribute="trailing" secondItem="CmE-cS-ndN" secondAttribute="trailing" id="bHv-hj-7QJ"/>
+                            <constraint firstItem="GLG-qB-6pK" firstAttribute="top" secondItem="0v1-T7-jmY" secondAttribute="bottom" constant="1" id="Mem-HZ-e2c"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GLG-qB-6pK" secondAttribute="trailing" constant="-30" id="cB5-KG-HWZ"/>
-                            <constraint firstItem="CmE-cS-ndN" firstAttribute="width" secondItem="O67-sB-bqL" secondAttribute="width" id="cvZ-tx-XWP"/>
-                            <constraint firstItem="GLG-qB-6pK" firstAttribute="bottom" secondItem="nRK-Cg-7EQ" secondAttribute="top" id="dTb-3T-L0c"/>
-                            <constraint firstItem="O67-sB-bqL" firstAttribute="top" secondItem="CmE-cS-ndN" secondAttribute="top" id="fnc-mi-MXT"/>
-                            <constraint firstItem="CmE-cS-ndN" firstAttribute="width" secondItem="O67-sB-bqL" secondAttribute="height" multiplier="5:2" constant="30" id="l21-Gq-JPC"/>
+                            <constraint firstItem="GLG-qB-6pK" firstAttribute="bottom" secondItem="nRK-Cg-7EQ" secondAttribute="top" constant="1" id="dTb-3T-L0c"/>
+                            <constraint firstItem="nRK-Cg-7EQ" firstAttribute="top" secondItem="O67-sB-bqL" secondAttribute="bottom" constant="20" id="j7l-g8-KRM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0v1-T7-jmY" secondAttribute="trailing" constant="-16" id="nhh-gC-Pyc"/>
+                            <constraint firstItem="0v1-T7-jmY" firstAttribute="leading" secondItem="J1X-g9-sQ3" secondAttribute="leadingMargin" constant="-16" id="pvL-4a-8Ca"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Nug-D9-fdo"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="GLG-qB-6pK" id="Acs-kl-W5e"/>
+                        <outlet property="startRunBtn" destination="O67-sB-bqL" id="wCg-6M-Vca"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOH-wG-KDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3155" y="2695"/>
+            <point key="canvasLocation" x="3153" y="2591"/>
         </scene>
         <!--Run Details View Controller-->
         <scene sceneID="OsU-Ms-tlc">

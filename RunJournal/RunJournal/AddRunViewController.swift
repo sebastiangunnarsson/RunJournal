@@ -206,16 +206,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
                 self.stopLoading()
             }
         })
-        
-        
-        
-        
     }
-
-    
-    
-    @IBAction func weatherButtonClick(sender: AnyObject) {
-        weatherDescLabel.text = openWeather.weatherList[0].weather["description"]}
     
     @IBAction func cancelClick(sender: AnyObject) {
         println(openWeather.country)
@@ -292,10 +283,6 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
             self.presentViewController(imag, animated: true, completion: nil)
         }
     }
-    
-    
-    
-    
     
     /*Image download*/
     func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {

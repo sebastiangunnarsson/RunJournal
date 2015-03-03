@@ -13,20 +13,19 @@ import CoreData
 class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var startRunBtn: UIButton!
     
     var locationManager:CLLocationManager!
     var myLocations: [CLLocation] = []
     var oldLocation:CLLocation!;
     var totalDistane:Double = 0;
     var objId:NSManagedObjectID?
-    
+
     var allRuns:[Run]!
     var run:Run!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        //distanceLabel.text = "\(runIndexPath)"
         self.mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.showsBuildings = true
@@ -35,17 +34,23 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         allRuns = getEntities("Run") as [Run]
         run = getRunByObjectId(objId!)
         
-      //  println("Locations \(run.locations)")
-        
         var i = 0
         var sourceLocation:Location!
         
         for location in run.locations.array{
+            startRunBtn.hidden = true
             var currentLocation = location as Location
+            if i == 1 {
+                var anotation = MKPointAnnotation()
+                var latitude = currentLocation.latitude as CLLocationDegrees
+                var longitude = currentLocation.longitude as CLLocationDegrees
+                anotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                anotation.title = "Start Location"
+                anotation.subtitle = "This is the runs start location!"
+                mapView.addAnnotation(anotation)
+            }
+            
             if (i > 1){
-                println( sourceLocation.latitude)
-                println( sourceLocation.longitude)
-
                 let location1 = CLLocationCoordinate2D(
                     latitude: sourceLocation.latitude as Double,
                     longitude: sourceLocation.longitude as Double
@@ -64,12 +69,20 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
 
                 var polyline = MKPolyline(coordinates: &a, count: a.count)
                 self.mapView.addOverlay(polyline, level: MKOverlayLevel.AboveLabels)
+                
+                if i == run.locations.count - 1 {
+                    var anotation = MKPointAnnotation()
+                    var latitude = currentLocation.latitude as CLLocationDegrees
+                    var longitude = currentLocation.longitude as CLLocationDegrees
+                    anotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    anotation.title = "End Location"
+                    anotation.subtitle = "This is the runs end location!"
+                    mapView.addAnnotation(anotation)
+                }
             }
             sourceLocation = location as Location
             i = i + 1
         }
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +90,15 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onRunDetailsClick(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+   /* createLocationManager()
+    * Initialize member varible, locationManager.
+    *
+    * Author: Samuel Eklund
+    */
     func createLocationManager() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -84,9 +106,14 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         locationManager.distanceFilter = 20
         locationManager.activityType = .Fitness
         locationManager.requestAlwaysAuthorization()
-
     }
     
+   /* locationManager(didUpdateLocations)
+    * Handels CLLocation location updates.
+    * Updates mapView and draws polyline, new location are also stored in myLocations.
+    *
+    * Author: Samuel Eklund
+    */
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         if let currentLocation = locations.first as? CLLocation
         {
@@ -117,27 +144,75 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         }
     }
     
+   /* startRunClick()
+    * (Missleading name) Handels user start/stop run interation.
+    *
+    * Author: Samuel Eklund
+    */
     @IBAction func startRunClick(sender: AnyObject) {
-        locationManager.startUpdatingLocation()
+        if startRunBtn.titleLabel?.text == "Start run session" {
+            startRunBtn.setTitle("End run session", forState: UIControlState.Normal)
+            startRunBtn.backgroundColor = UIColor.cyanColor()
+            locationManager.startUpdatingLocation()
+        }else if startRunBtn.titleLabel?.text == "End run session" {
+            startRunBtn.setTitle("Start run session", forState: UIControlState.Normal)
+            showSaveDialog()
+        }
     }
-    
-    @IBAction func stopRunClick(sender: AnyObject) {
-        locationManager.stopUpdatingLocation()
-        
+   
+   /* showSaveDialog()
+    * Asks user if current run should be saved.
+    *
+    * Author: Samuel Eklund
+    */
+    func showSaveDialog() {
+        var dialog = UIAlertView()
+        dialog.delegate = self
+        dialog.message = "Would you like to save current run session?"
+        dialog.addButtonWithTitle("End and save")
+        dialog.addButtonWithTitle("Clear run")
+        dialog.addButtonWithTitle("Cancel")
+        dialog.title = "Save Run"
+        dialog.show()
+    }
+   
+   /* alertView()
+    * Handels alert view Click.
+    *
+    * Author: Samuel Eklund
+    */
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+        switch buttonIndex{
+        case 0:
+            storeRunSessionData()
+            locationManager.stopUpdatingLocation()
+            startRunBtn.hidden = true
+            break
+        case 1:
+            locationManager.stopUpdatingLocation()
+            myLocations = []
+            break
+        default:
+            break
+        }
+    }
+   
+   /* storeRunSessionData()
+    * Stores current run session in coreData.
+    *
+    * Author: Samuel Eklund
+    */
+    func storeRunSessionData(){
         var locationArray = NSMutableArray()
-        
         for location:CLLocation in self.myLocations {
             let newItem = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: self.manageContext) as Location
-            
             newItem.latitude = location.coordinate.latitude
             newItem.longitude = location.coordinate.longitude
             newItem.run = run
             locationArray.addObject(newItem)
         }
-        println(locationArray)
         saveEntities()
     }
-    
     
     /* mapView(MKMapView!, MKOverlay!) -> MKOverlayRenderer!
      * Returns polylineRender that will be used when printing line on map.
@@ -151,11 +226,9 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
 
             var polylineRenderer = MKPolylineRenderer(overlay: overlay)
             polylineRenderer.strokeColor = UIColor.lightGrayColor()
-            polylineRenderer.lineWidth = 6
+            polylineRenderer.lineWidth = 3
             return polylineRenderer
         }
         return nil
     }
-    
-
 }

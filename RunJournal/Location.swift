@@ -15,5 +15,4 @@ class Location: NSManagedObject {
     @NSManaged var longitude: NSNumber
     @NSManaged var timestamp: NSNumber
     @NSManaged var run: RunJournal.Run
-
 }
