@@ -16,6 +16,7 @@
 		13AEF3541A9367C1009594BE /* RunMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEF3531A9367C1009594BE /* RunMapController.swift */; };
 		13AEF3561A937351009594BE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AEF3551A937351009594BE /* MapKit.framework */; };
 		13AEF35E1A93A148009594BE /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AEF35D1A93A148009594BE /* Run.swift */; };
+		1F2B9E0C1AAE331300E0A3FA /* TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2B9E0B1AAE331300E0A3FA /* TableViewDelegate.swift */; };
 		1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D291E1A77CE1700276300 /* AppDelegate.swift */; };
 		1F6D29221A77CE1700276300 /* RunJournal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29201A77CE1700276300 /* RunJournal.xcdatamodeld */; };
 		1F6D29241A77CE1700276300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D29231A77CE1700276300 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		13AEF3531A9367C1009594BE /* RunMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunMapController.swift; sourceTree = "<group>"; };
 		13AEF3551A937351009594BE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		13AEF35D1A93A148009594BE /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
+		1F2B9E0B1AAE331300E0A3FA /* TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegate.swift; sourceTree = "<group>"; };
 		1F6D29191A77CE1700276300 /* RunJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6D291D1A77CE1700276300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6D291E1A77CE1700276300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		1F6D291B1A77CE1700276300 /* RunJournal */ = {
 			isa = PBXGroup;
 			children = (
+				1F2B9E0B1AAE331300E0A3FA /* TableViewDelegate.swift */,
 				1F6D291E1A77CE1700276300 /* AppDelegate.swift */,
 				1F6D29231A77CE1700276300 /* ViewController.swift */,
 				1F6D29251A77CE1700276300 /* Main.storyboard */,
@@ -269,6 +272,7 @@
 				13AEF3541A9367C1009594BE /* RunMapController.swift in Sources */,
 				1F6D291F1A77CE1700276300 /* AppDelegate.swift in Sources */,
 				1F6D29421A77D4FD00276300 /* ContextViewController.swift in Sources */,
+				1F2B9E0C1AAE331300E0A3FA /* TableViewDelegate.swift in Sources */,
 				137AE3751A8651FD005CF0C3 /* OpenWeather.swift in Sources */,
 				13AEF35E1A93A148009594BE /* Run.swift in Sources */,
 				132276821A93ACE000D9FD7A /* Location.swift in Sources */,

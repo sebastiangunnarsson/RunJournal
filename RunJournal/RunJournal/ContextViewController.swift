@@ -87,6 +87,40 @@ class ContextViewController: UIViewController {
         saveEntities()
         
     }
+    
+    // Hämtar alla avklarade löprundor
+    func getCompletedRuns() -> [Run] {
+        var allRuns = getEntities("Run") as [Run]
+        var result = [Run]()
+        
+        for(var i = 0; i < allRuns.count; i++) {
+            var run = allRuns[i] as Run
+            println(run.isCompleted)
+            
+            if(run.isCompleted == true) {
+                    result.append( run )
+            }
+        }
+        return result
+    }
+    
+    // Hämtar alla icke avklarade löprundor
+    func getScheduledRuns() -> [Run] {
+        
+        var allRuns = getEntities("Run") as [Run]
+        var result = [Run]()
+        
+        for(var i = 0; i < allRuns.count; i++) {
+            var run = allRuns[i] as Run
+            println(run.isCompleted)
+            if(run.isCompleted == false) {
+                result.append( run )
+            }
+        }
+        return result
+    }
+    
+    
     // Hämtar alla inkommande löpturer (Idag och framåt)
     func getUpcomingScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)

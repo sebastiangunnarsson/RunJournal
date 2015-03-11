@@ -9,46 +9,76 @@
 import UIKit
 var openWeather:OpenWeather = OpenWeather()
 
-class ViewController: ContextViewController, UITableViewDelegate,UITableViewDataSource {
+class ViewController: ContextViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var rightTableView: UITableView!
     
     @IBOutlet weak var filterSegment: UISegmentedControl!
     
+    var firstTableViewDelegate:TableViewDelegate!
+    var secondTableViewDelegate:TableViewDelegate!
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        firstTableViewDelegate = TableViewDelegate(coder: aDecoder)
+        secondTableViewDelegate = TableViewDelegate(coder: aDecoder)
+        
+    }
+    
     @IBAction func filterControlSelected(sender: AnyObject) {
+        
+        
             reloadRuns()
+        
+    }
+    
+    /*
+        Hide the filter bar when landscape
+    */
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        if(UIDevice.currentDevice().orientation.rawValue == 3 ||
+            UIDevice.currentDevice().orientation.rawValue == 4){
+                filterSegment.hidden = true
+                secondTableViewDelegate.reloadRuns(FilterType.Scheduled.rawValue)
+                secondTableViewDelegate.reloadRuns(FilterType.Completed.rawValue)
+                
+        } else {
+            filterSegment.hidden = false
+            firstTableViewDelegate.reloadRuns(filterSegment.selectedSegmentIndex)
+        }
     }
     
     func reloadRuns() {
-        switch(filterSegment.selectedSegmentIndex)
-        {
-        case FilterType.Elapsed.rawValue:
-            runs = getPreviouslyScheduledRuns()
-            break
-        case FilterType.Coming.rawValue:
-            runs = getUpcomingScheduledRuns()
-            break
-        default:
-            runs = getEntities("Run") as [Run]
-            break
-        }
+        
+        firstTableViewDelegate.reloadRuns(filterSegment.selectedSegmentIndex)
+        secondTableViewDelegate.reloadRuns(filterSegment.selectedSegmentIndex)
+        
         self.tableView.reloadData()
+        self.rightTableView.reloadData()
     }
     
     enum FilterType: Int {
-        case  Elapsed = 0
-        case Coming = 1
+        case Completed = 0
+        case Scheduled = 1
         case All = 2
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        
+        tableView.delegate = firstTableViewDelegate
+        tableView.dataSource = firstTableViewDelegate
         tableView.allowsMultipleSelectionDuringEditing = false
+        
+        rightTableView.delegate = secondTableViewDelegate
+        rightTableView.dataSource = secondTableViewDelegate
+        rightTableView.allowsMultipleSelectionDuringEditing = false
     }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         
@@ -56,42 +86,6 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
         
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return runs!.count
-    }
-    
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if(editingStyle == UITableViewCellEditingStyle.Delete) {
-            let run = runs?[indexPath.row] as Run
-            deleteRun(run)
-            
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-        }
-        
-        
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RunTableCell", forIndexPath: indexPath) as RunTableCell
-        
-        let run = runs?[indexPath.row] as Run
-        
-        cell.nameLabel.text = run.name
-        cell.dateLabel.text = NSDateFormatter.localizedStringFromDate(run.date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
-        if(run.image != nil) {
-            cell.thumbnailImageView.image = run.GetImage()
-        } else {
-            cell.thumbnailImageView.image = nil
-        }
-    
-        return cell
-    }
     
     /* Select row in table view.
      * Displays title detail page.
@@ -107,11 +101,14 @@ class ViewController: ContextViewController, UITableViewDelegate,UITableViewData
         if(segue.identifier ==  "runDetail") {
             var dvc = segue.destinationViewController as RunDetailsViewController
             var indexRow = self.tableView.indexPathForSelectedRow()?.row
-            var objId = runs?[indexRow!].objectID
+            var objId = self.firstTableViewDelegate!.runs?[indexRow!].objectID
+            dvc.objId = objId
+        } else if( segue.identifier == "runDetailsSecond") {
+            var dvc = segue.destinationViewController as RunDetailsViewController
+            var indexRow = self.rightTableView.indexPathForSelectedRow()?.row
+            var objId = self.secondTableViewDelegate!.runs![0].objectID
             dvc.objId = objId
         }
-        //var x = runs![indexRow!].objectID
-        
     }
     
     

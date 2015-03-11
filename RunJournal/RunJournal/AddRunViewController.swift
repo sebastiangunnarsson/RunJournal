@@ -122,6 +122,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         addRunWith(nameTextField.text, length: length.doubleValue, start: datePicker.date, duration: duration, image: imageData)
     }
     
+    // Made by Sebastian Gunnarsson
     func createCalendarEventFor(title:String, date:NSDate, notes:String, duration:Int, store:EKEventStore) -> EKEvent {
         
         
@@ -145,67 +146,78 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
     }
     
+    // Made by Sebastian Gunnarsson
     // check if anything in the default calendar collides with the given date
     func addRunWith(name:String, length:Double, start:NSDate, duration:Int, image: NSData?) {
         
         var eventStore = EKEventStore()
         
-        // Förfrågar om att få använda kalendern
-        eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
-            granted, error in
-            if(granted) && (error == nil) {
-                println("granted")
-                
-                // kollar om använder vill se om löprundan krockar med tillagda events
-                if(self.calendarCollisionSwitch.enabled && self.calendarCollisionSwitch.on) {
+        // fixa så inte addRun stannar om man inte väljer kalender
+        if(self.addToCalendarSwitch.on) {
+        
+            // Makes a request to use the calendar
+            eventStore.requestAccessToEntityType(EKEntityTypeEvent, completion: {
+                granted, error in
+                if(granted) && (error == nil) {
+                    println("granted")
                     
-                    var collides:Bool = true;
-                    var interval = NSTimeInterval(duration * 60) // interval i sekunder
-                    var startDate = start
-                    var endDate = start.dateByAddingTimeInterval(interval) // lägger till duration på startdate
-                    
-                    // predikat som matchar alla event som ligger mellan start och start + duration
-                    var predicate2 = eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: nil)
-                    // hämtar alla events som matchar predikatet
-                    var eV = eventStore.eventsMatchingPredicate(predicate2) as [EKEvent]!
-                    
-                    // kollar om evenStore är noll eller att det finns 0 events == ingen krock
-                    if eV != nil {
-                        if( eV.count == 0) {
-                            collides = false // no entries
+                    // kollar om använder vill se om löprundan krockar med tillagda events
+                    if(self.calendarCollisionSwitch.enabled && self.calendarCollisionSwitch.on) {
+                        
+                        var collides:Bool = true;
+                        var interval = NSTimeInterval(duration * 60) // interval i sekunder
+                        var startDate = start
+                        var endDate = start.dateByAddingTimeInterval(interval) // lägger till duration på startdate
+                        
+                        // predikat som matchar alla event som ligger mellan start och start + duration
+                        var predicate2 = eventStore.predicateForEventsWithStartDate(startDate, endDate: endDate, calendars: nil)
+                        // hämtar alla events som matchar predikatet
+                        var eV = eventStore.eventsMatchingPredicate(predicate2) as [EKEvent]!
+                        
+                        // kollar om evenStore är noll eller att det finns 0 events == ingen krock
+                        if eV != nil {
+                            if( eV.count == 0) {
+                                collides = false // no entries
+                            }
+                        } else {
+                            collides = false // event return nil, = no entries
                         }
-                    } else {
-                        collides = false // event return nil, = no entries
+                        
+                        if(collides) { // eventet krockar
+                            self.showErrorDialog("This run collides with another event!")
+                            self.stopLoading()
+                            return;
+                        } else {
+                            self.addRun(name, length: length, date:start, isCompleted: false, image: image, duration:duration)
+                            var event = self.createCalendarEventFor(name, date: start, notes: "You have a scheduled run with RunJournal!", duration: duration, store:eventStore)
+                            eventStore.saveEvent(event, span: EKSpanThisEvent, error: nil) // sparar eventet
+                            self.dismissViewControllerAnimated(true, completion: nil) // dismissar vyn så man kommer tillbaka till start sidan
+                            return;
+                        }
                     }
                     
-                    if(collides) { // eventet krockar
-                        self.showErrorDialog("This run collides with another event!")
-                        self.stopLoading()
-                        return;
-                    } else {
-                        self.addRun(name, length: length, date:start, isCompleted: false, image: image, duration:duration)
+                    // lägger till eventet om användaren inte bryr sig om det krockar
+                    self.addRun(name, length: length, date:start, isCompleted: false, image: image, duration:duration)
+                    // lägger till i kalendern om det är valt
+                    if(self.addToCalendarSwitch.on) {
                         var event = self.createCalendarEventFor(name, date: start, notes: "You have a scheduled run with RunJournal!", duration: duration, store:eventStore)
-                        eventStore.saveEvent(event, span: EKSpanThisEvent, error: nil) // sparar eventet
-                        self.dismissViewControllerAnimated(true, completion: nil) // dismissar vyn så man kommer tillbaka till start sidan
-                        return;
+                        eventStore.saveEvent(event, span: EKSpanThisEvent, error: nil)
+                        self.dismissViewControllerAnimated(true, completion: nil)
                     }
+                    
+                } else {
+                    // användaren vägrade ge tillåtelse till kalendern
+                    self.showErrorDialog("Could not add event, permission not granted to calendr!")
+                    self.stopLoading()
                 }
-                
-                // lägger till eventet om användaren inte bryr sig om det krockar
-                self.addRun(name, length: length, date:start, isCompleted: false, image: image, duration:duration)
-                // lägger till i kalendern om det är valt
-                if(self.addToCalendarSwitch.on) {
-                    var event = self.createCalendarEventFor(name, date: start, notes: "You have a scheduled run with RunJournal!", duration: duration, store:eventStore)
-                    eventStore.saveEvent(event, span: EKSpanThisEvent, error: nil)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }
-                
-            } else {
-                // användaren vägrade ge tillåtelse till kalendern
-                self.showErrorDialog("Could not add event, permission not granted to calendr!")
-                self.stopLoading()
-            }
-        })
+            })
+        
+        } else {
+            self.addRun(name, length: length, date: start, isCompleted: true, image: image, duration: duration)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        
     }
     
     @IBAction func cancelClick(sender: AnyObject) {
@@ -213,6 +225,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // Made by Sebastian Gunnarsson
     // visar popup dialog med givet felmeddelande
     func showErrorDialog(message:String) {
         var dialog = UIAlertView()
@@ -221,7 +234,8 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         dialog.show()
     }
     
-    //Visar popup för multipla fel
+    // Made by Sebastian Gunnarsson
+    // Visar popup för multipla fel
     func showErrorsDialog(messages:[String]){
         var dialog = UIAlertView()
         
