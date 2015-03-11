@@ -187,6 +187,8 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
             storeRunSessionData()
             locationManager.stopUpdatingLocation()
             startRunBtn.hidden = true
+            run.isCompleted = true
+            saveEntities()
             break
         case 1:
             locationManager.stopUpdatingLocation()

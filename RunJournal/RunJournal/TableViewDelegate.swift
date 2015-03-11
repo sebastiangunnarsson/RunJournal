@@ -17,7 +17,7 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        runs = getEntities("Run") as [Run]
+        runs = getEntities("Run")
     }
     
     
@@ -26,22 +26,26 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         switch(val)
         {
         case 0:
-            runs = getCompletedRuns()
-            break
-        case 1:
             runs = getScheduledRuns()
             break
+        case 1:
+            runs = getCompletedRuns()
+            break
+        case 2:
+            runs = getPassedRuns()
+            break
         default:
-            runs = getEntities("Run") as [Run]
+            runs = getEntities("Run")
             break
         }
         //self.tableView.reloadData()
     }
     
     enum FilterType: Int {
-        case  Elapsed = 0
-        case Coming = 1
-        case All = 2
+        case  Scheduled = 0
+        case Completed = 1
+        case Passed = 2
+        case All = 3
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,6 +55,8 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
+    
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -69,13 +75,29 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         
         let run = runs?[indexPath.row] as Run
         
+        
+        
+        if(run.isCompleted == true) {
+            cell.completedLabel.text = "Completed"
+            cell.completedLabel.textColor = UIColor.greenColor()
+        }else if(dateHasPassed(run.date)){
+            cell.completedLabel.text = "Passed"
+            cell.completedLabel.textColor = UIColor.redColor()
+        } else {
+            cell.completedLabel.text = "Scheduled"
+            cell.completedLabel.textColor = UIColor.orangeColor()
+        }
+        
         cell.nameLabel.text = run.name
         cell.dateLabel.text = NSDateFormatter.localizedStringFromDate(run.date, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
         if(run.image != nil) {
             cell.thumbnailImageView.image = run.GetImage()
         } else {
             cell.thumbnailImageView.image = nil
+            cell.thumbnailImageView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
         }
+        
+        
         
         return cell
     }

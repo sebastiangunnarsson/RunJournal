@@ -78,7 +78,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
         var weatherIndex = datePicker.date.hoursFrom(date) / 24
         
-        if(weatherIndex < 16 && weatherIndex >= 0){
+        if(weatherIndex < openWeather.weatherList.count && weatherIndex >= 0){
             weatherDescLabel.text = openWeather.weatherList[weatherIndex].weather["description"]
             var iconName = openWeather.weatherList[weatherIndex].weather["icon"]
 
@@ -88,6 +88,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
             }
         } else {
             weatherDescLabel.text = "N/A"
+            imageURL.image = nil
         }
         println(datePicker.date.hoursFrom(date) / 24)
     }
@@ -213,7 +214,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
             })
         
         } else {
-            self.addRun(name, length: length, date: start, isCompleted: true, image: image, duration: duration)
+            self.addRun(name, length: length, date: start, isCompleted: false, image: image, duration: duration)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         

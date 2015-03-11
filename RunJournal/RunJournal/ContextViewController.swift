@@ -38,7 +38,7 @@ class ContextViewController: UIViewController {
     func deleteRun(run: NSManagedObject) {
         manageContext.deleteObject(run)
         saveEntities()
-        runs = getEntities("Run") as [Run]
+        runs = getEntities("Run")
     }
     
     override func viewDidLoad() {
@@ -90,12 +90,12 @@ class ContextViewController: UIViewController {
     
     // Hämtar alla avklarade löprundor
     func getCompletedRuns() -> [Run] {
-        var allRuns = getEntities("Run") as [Run]
+        var allRuns = getEntities("Run")
         var result = [Run]()
         
         for(var i = 0; i < allRuns.count; i++) {
             var run = allRuns[i] as Run
-            println(run.isCompleted)
+            
             
             if(run.isCompleted == true) {
                     result.append( run )
@@ -107,28 +107,59 @@ class ContextViewController: UIViewController {
     // Hämtar alla icke avklarade löprundor
     func getScheduledRuns() -> [Run] {
         
-        var allRuns = getEntities("Run") as [Run]
+        var allRuns = getEntities("Run")
         var result = [Run]()
         
         for(var i = 0; i < allRuns.count; i++) {
             var run = allRuns[i] as Run
-            println(run.isCompleted)
-            if(run.isCompleted == false) {
+            
+            if(run.isCompleted == false && dateHasPassed(run.date) == false) {
                 result.append( run )
             }
         }
         return result
     }
     
+    func getPassedRuns() -> [Run] {
+        var allRuns = getEntities("Run")
+        var result = [Run]()
+        
+        for(var i = 0; i < allRuns.count; i++) {
+            var run = allRuns[i] as Run
+            
+            if(run.isCompleted == false && dateHasPassed(run.date) == true) {
+                result.append( run )
+            }
+        }
+        return result
+    }
+    
+    // Check whether the date has passed
+    func dateHasPassed(date:NSDate) -> Bool {
+        var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+        
+        return (date.timeIntervalSinceNow < 0)
+        
+        /*
+        if( date.compare(date) == NSComparisonResult.OrderedAscending && calendar?.isDateInToday(date) == false) {
+                return true
+        }
+        return false
+        */
+    }
+    
+    
     
     // Hämtar alla inkommande löpturer (Idag och framåt)
     func getUpcomingScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
-        runs = getEntities("Run") as [Run]
+        runs = getEntities("Run")
         var result = [Run]()
         var currentDate = NSDate()
         for(var i = 0; i < runs?.count; i++) {
             var run = runs?[i] as Run
+            
+            
             
             if( run.date.compare(currentDate) == NSComparisonResult.OrderedDescending || calendar?.isDateInToday(run.date) == true) {
                 //if( calendar?.isDateInToday(run.date) == false) {
@@ -136,7 +167,6 @@ class ContextViewController: UIViewController {
                // }
             }
         }
-        
         return result
     }
     
@@ -144,7 +174,7 @@ class ContextViewController: UIViewController {
     func getPreviouslyScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         
-        runs = getEntities("Run") as [Run]
+        runs = getEntities("Run")
         
         var result = [Run]()
         var currentDate = NSDate()
@@ -163,7 +193,7 @@ class ContextViewController: UIViewController {
     func getTodaysScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         
-        runs = getEntities("Run") as [Run]
+        runs = getEntities("Run")
         
         var result = [Run]()
         var currentDate = NSDate()
@@ -179,7 +209,7 @@ class ContextViewController: UIViewController {
     // Hämtar alla entities from en viss tabell (som en array av NSManagedObjects)
     // Vill man ha alla objekt från tabellen Run så kör man bara följande:
     // var runs = getEntities("Run") as [Run]
-    func getEntities(entityName:String) -> [NSManagedObject] {
+    func getEntities(entityName:String) -> [Run] {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         
         var error: NSError?
@@ -187,10 +217,14 @@ class ContextViewController: UIViewController {
         let fetchedResults = manageContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
         
         if let results = fetchedResults {
-            return results
+            
+            var result = results as [Run]
+            
+            result.sort({ $0.date.timeIntervalSinceNow < $1.date.timeIntervalSinceNow })
+            return result
         }
         print(error);
-        return [NSManagedObject]()
+        return [Run]()
     }
     
     override func didReceiveMemoryWarning() {

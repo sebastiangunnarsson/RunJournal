@@ -60,9 +60,10 @@ class ViewController: ContextViewController {
     }
     
     enum FilterType: Int {
-        case Completed = 0
-        case Scheduled = 1
-        case All = 2
+        case Scheduled = 0
+        case Completed = 1
+        case Passed = 2
+        case All = 3
     }
     
     override func viewDidLoad() {

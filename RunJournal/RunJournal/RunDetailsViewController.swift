@@ -13,6 +13,9 @@ import EventKit
 
 class RunDetailsViewController: ContextViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate {
 
+    
+    @IBOutlet weak var startRunButton: UIButton!
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var lengthTextField: UITextField!
     @IBOutlet weak var enableEditingSwitch: UISwitch!
@@ -36,6 +39,12 @@ class RunDetailsViewController: ContextViewController,UINavigationControllerDele
         }
         addRelatedPicButton.enabled = false
         saveBarButton.enabled = false
+        
+        // disable start run if its completed or passed
+        if(run!.isCompleted == true || dateHasPassed(run!.date)){
+            startRunButton.enabled = false
+        }
+        
     }
     
     @IBAction func OnSaveClicked(sender: AnyObject) {
