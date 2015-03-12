@@ -56,7 +56,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
     }
     
-    // Påbörjar loading spinnaren centrerad
+    // starts a loading spinner centered to the screen
     func startLoading() {
         self.loadingSpinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         self.loadingSpinner.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.width, self.view.frame.height);
@@ -66,7 +66,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         self.view.addSubview( self.loadingSpinner )
     }
     
-    // döljer laddarsnurran
+    // hides the loading spinner 
     func stopLoading() {
         if(self.loadingSpinner != nil) {
             self.loadingSpinner.stopAnimating()
@@ -99,13 +99,15 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
         var errs = [String]()
         
-        if(nameTextField.text.isEmpty)
-        {
+        if(nameTextField.text.isEmpty){
             errs.append("Name is required")
         }
-        if(durationTextField.text.isEmpty)
-        {
+        if(durationTextField.text.isEmpty){
             errs.append("Duration is required")
+        }
+        
+        if(datePicker.date.timeIntervalSinceNow < 0){
+            errs.append("Date has passed")
         }
         
         if(errs.count > 0)

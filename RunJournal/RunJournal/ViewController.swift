@@ -35,21 +35,26 @@ class ViewController: ContextViewController {
     }
     
     /*
-        Hide the filter bar when landscape
+        Hide the filter bar when landscape and instead show scheduled run to the left, and completed to the right
     */
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if(UIDevice.currentDevice().orientation.rawValue == 3 ||
             UIDevice.currentDevice().orientation.rawValue == 4){
                 filterSegment.hidden = true
-                secondTableViewDelegate.reloadRuns(FilterType.Scheduled.rawValue)
+                firstTableViewDelegate.reloadRuns(FilterType.Scheduled.rawValue)
                 secondTableViewDelegate.reloadRuns(FilterType.Completed.rawValue)
+                
+                self.tableView.reloadData()
+                self.rightTableView.reloadData()
                 
         } else {
             filterSegment.hidden = false
             firstTableViewDelegate.reloadRuns(filterSegment.selectedSegmentIndex)
+            self.tableView.reloadData()
         }
     }
     
+    // reloads the tableviews with correct data
     func reloadRuns() {
         
         firstTableViewDelegate.reloadRuns(filterSegment.selectedSegmentIndex)
@@ -70,6 +75,7 @@ class ViewController: ContextViewController {
         
         super.viewDidLoad()
         
+        // sets delegate and datasource to the tableviews
         tableView.delegate = firstTableViewDelegate
         tableView.dataSource = firstTableViewDelegate
         tableView.allowsMultipleSelectionDuringEditing = false

@@ -10,18 +10,18 @@ import UIKit
 
 class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableViewDataSource {
    
+    var lastFilter:Int?
    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-    }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         runs = getEntities("Run")
     }
     
-    
+    // load correct data from filtering
     func reloadRuns(val:Int) {
+        
+        lastFilter = val
         
         switch(val)
         {
@@ -38,7 +38,6 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
             runs = getEntities("Run")
             break
         }
-        //self.tableView.reloadData()
     }
     
     enum FilterType: Int {
@@ -62,9 +61,10 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         
         if(editingStyle == UITableViewCellEditingStyle.Delete) {
             let run = runs?[indexPath.row] as Run
-            deleteRun(run)
+            deleteRun(run, lastFilter: lastFilter!)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            
         }
         
         

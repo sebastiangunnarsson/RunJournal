@@ -13,13 +13,15 @@ import EventKit
 
 class RunDetailsViewController: ContextViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate {
 
-    @IBOutlet weak var actualDistanceLabel: UILabel!
     
     @IBOutlet weak var startRunButton: UIButton!
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var lengthTextField: UITextField!
     @IBOutlet weak var enableEditingSwitch: UISwitch!
+    
+    @IBOutlet weak var enableEditingLabel: UILabel!
+    
     @IBOutlet weak var durationTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var relatedPicImageView: UIImageView!
@@ -43,11 +45,21 @@ class RunDetailsViewController: ContextViewController,UINavigationControllerDele
         
         // disable start run if its completed or passed
         if(run!.isCompleted == true || dateHasPassed(run!.date)){
-            startRunButton.enabled = false
+            startRunButton?.setTitle("View run",forState: UIControlState.Normal)
+            enableEditingSwitch.hidden = true
+            enableEditingLabel.hidden = true
         }
-        var outputFormat = String(format: "%.2f km", run!.actualLength.doubleValue / 1000.0)
-        actualDistanceLabel.text = "\(outputFormat)"
         
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        run = getRunByObjectId(self.objId!)
+        if(run!.isCompleted == true || dateHasPassed(run!.date)) {
+            startRunButton?.setTitle("View run",forState: UIControlState.Normal)
+            enableEditingSwitch.hidden = true
+            enableEditingLabel.hidden = true
+        }
     }
     
     @IBAction func OnSaveClicked(sender: AnyObject) {

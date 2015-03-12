@@ -35,10 +35,26 @@ class ContextViewController: UIViewController {
         return manageContext.objectWithID(objectId) as Run
     }
     
-    func deleteRun(run: NSManagedObject) {
+    func deleteRun(run: NSManagedObject, lastFilter:Int) {
         manageContext.deleteObject(run)
         saveEntities()
-        runs = getEntities("Run")
+        
+        switch(lastFilter){
+        case 0:
+            runs = getScheduledRuns()
+            break
+        case 1:
+            runs = getCompletedRuns()
+            break
+        case 2:
+            runs = getPassedRuns()
+            break
+        default:
+            runs = getEntities("Run")
+            
+        }
+        
+       
     }
     
     override func viewDidLoad() {
@@ -80,6 +96,7 @@ class ContextViewController: UIViewController {
         item.name = name
         item.length = length
         item.isCompleted = isCompleted
+        item.actualDuration = 0
         item.image = image
         item.actualLength = 0.0
         item.duration = duration

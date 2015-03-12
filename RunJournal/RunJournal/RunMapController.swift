@@ -15,6 +15,8 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startRunBtn: UIButton!
     
+    @IBOutlet weak var runDetailsButton: UIBarButtonItem!
+    
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
@@ -30,9 +32,12 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
     var allRuns:[Run]!
     var run:Run!
     
-    func timeFormat(since:NSDate) -> String {
+    /*
+    *   Author: David
+    */
+    func timeFormat(since:NSDate, to:NSDate) -> String {
         
-        var timePassed = Int(NSDate().timeIntervalSinceDate(since))
+        var timePassed = Int(to.timeIntervalSinceDate(since))
         
         var hourStr:String = "", minStr:String = "", secStr:String = ""
         
@@ -53,7 +58,7 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
     }
     
     func update() {
-        timeLabel.text = timeFormat(start!)
+        timeLabel.text = timeFormat(start!, to: NSDate())
     }
     
     override func viewDidLoad() {
@@ -62,8 +67,6 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         mapView.showsUserLocation = true
         mapView.showsBuildings = true
         createLocationManager()
-        
-        
         
         allRuns = getEntities("Run") as [Run]
         run = getRunByObjectId(objId!)
@@ -112,6 +115,8 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
                     anotation.title = "End Location"
                     anotation.subtitle = "This is the runs end location!"
                     mapView.addAnnotation(anotation)
+                    distanceLabel.text = String(format: "Distance:          %.2f km", run.actualLength.doubleValue / 1000.0)
+                    timeLabel.text = timeFormat(run.actualDate, to: run.actualDate.dateByAddingTimeInterval(NSTimeInterval( run.actualDuration!)))
                 }
             }
             sourceLocation = location as Location
@@ -152,9 +157,6 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         if let currentLocation = locations.first as? CLLocation
         {
             myLocations.append(currentLocation)
-            
-            
-            
             mapView.setCenterCoordinate(currentLocation.coordinate, animated: true)
             
             var newRegion = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
@@ -192,13 +194,15 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
             startRunBtn.backgroundColor = UIColor.cyanColor()
             locationManager.startUpdatingLocation()
             start = NSDate()
+            totalDistane = 0.0
             timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+            runDetailsButton.enabled = false
             
-        }else if startRunBtn.titleLabel?.text == "End run session" {
-            startRunBtn.setTitle("Start run session", forState: UIControlState.Normal)
-            timer?.invalidate()
-            showSaveDialog()
+        }else {
+             showSaveDialog()
         }
+            
+        
     }
    
    /* showSaveDialog()
@@ -211,7 +215,6 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         dialog.delegate = self
         dialog.message = "Would you like to save current run session?"
         dialog.addButtonWithTitle("End and save")
-        dialog.addButtonWithTitle("Clear run")
         dialog.addButtonWithTitle("Cancel")
         dialog.title = "Save Run"
         dialog.show()
@@ -230,11 +233,12 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
             startRunBtn.hidden = true
             run.isCompleted = true
             run.actualLength = totalDistane
-            saveEntities()
-            break
-        case 1:
-            locationManager.stopUpdatingLocation()
+            run.actualDate = start!
+            run.actualDuration = 30
+            runDetailsButton.enabled = true
+            timer?.invalidate()
             myLocations = []
+            saveEntities()
             break
         default:
             break
