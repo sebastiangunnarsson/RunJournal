@@ -8,6 +8,9 @@
 
 import Foundation
 
+/* OpenWeather Class.
+ * 
+ * Author: Samuel Eklund */
 class OpenWeather {
     var city: [String: String] = [
         "id": "",
@@ -20,7 +23,10 @@ class OpenWeather {
     var country = ""
     var weatherList:[Weather] = []
     
-    func test(){
+    /* loadWeatherData()
+     *
+     */
+    func loadWeatherData(){
         DataManager.get16DaysForecastDataFromOpenWeatherMapJSON{ (openWeatherData) -> Void in
             let json = JSON(data: openWeatherData)
             
@@ -45,47 +51,51 @@ class OpenWeather {
                 self.country = country
             }
             if let weatherList = json["list"].arrayValue {
-                
+                // parses weatherList to weatherObjects.
                 for weatherObject in weatherList {
                     var tempWeather = Weather()
+                    // Temp
                     if let temp = weatherObject["temp"]["day"].doubleValue {
                         tempWeather.temp = temp - 273.15
                     }
+                    // Description
                     if let weatherDesc = weatherObject["weather"]["desc"].stringValue {
                         tempWeather.weather["description"] = weatherDesc
                     }
+                    // Pressure
                     if let pressure = weatherObject["pressure"].doubleValue {
                         tempWeather.pressure = pressure
                     }
-                    if let pressure = weatherObject["humidity"].integerValue {
-                        tempWeather.humidity = pressure
+                    // Humidity
+                    if let humidity = weatherObject["humidity"].integerValue {
+                        tempWeather.humidity = humidity
                     }
+                    // WeatherID
                     if let weatherID = weatherObject["weather"][0]["id"].stringValue {
                         tempWeather.weather["id"] = weatherID
-                    }
-                    if let weatherClouds = weatherObject["clouds"].stringValue {
-                        tempWeather.weather["clouds"] = weatherClouds
                     }
                     if let weatherDesc = weatherObject["weather"][0]["description"].stringValue {
                         tempWeather.weather["description"] = weatherDesc
                     }
+                    // Clouds
+                    if let weatherClouds = weatherObject["clouds"].stringValue {
+                        tempWeather.weather["clouds"] = weatherClouds
+                    }
+                    // Icon
                     if let weatherIcon = weatherObject["weather"][0]["icon"].stringValue {
                         tempWeather.weather["icon"] = weatherIcon
                     }
                     self.weatherList.append(tempWeather)
                 }
             }
-            println(self.weatherList[0].weather["id"]!)
-            println(self.weatherList[0].weather["clouds"]!)
-            println(self.weatherList[0].weather["description"]!)
-            println(self.weatherList[0].weather["icon"]!)
-            println(self.weatherList[0].temp)
-            println(self.weatherList[0].pressure)
-            println(self.weatherList[0].humidity)
         }
     }
 }
 
+/* Weather class
+ * Holds weather info.
+ *
+ * Author: Samuel Eklund. */
 class Weather {
     var temp = 0.0
     var pressure = 0.0

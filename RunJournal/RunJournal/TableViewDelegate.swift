@@ -20,7 +20,10 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         runs = getEntities("Run")
     }
     
-    
+    /* reloadRuns
+     * Reloads different runs depending on filtering.
+     *
+     * Authors: Samuel Eklund, David Kalrsson. */
     func reloadRuns(val:Int) {
         
         switch(val)
@@ -56,8 +59,6 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         return true
     }
     
-    
-    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if(editingStyle == UITableViewCellEditingStyle.Delete) {
@@ -74,8 +75,6 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("RunTableCell", forIndexPath: indexPath) as RunTableCell
         
         let run = runs?[indexPath.row] as Run
-        
-        
         
         if(run.isCompleted == true) {
             cell.completedLabel.text = "Completed"
@@ -96,8 +95,6 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
             cell.thumbnailImageView.image = nil
             cell.thumbnailImageView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
         }
-        
-        
         
         return cell
     }

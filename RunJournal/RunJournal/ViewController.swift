@@ -20,6 +20,26 @@ class ViewController: ContextViewController {
     var firstTableViewDelegate:TableViewDelegate!
     var secondTableViewDelegate:TableViewDelegate!
     
+    enum FilterType: Int {
+        case Scheduled = 0
+        case Completed = 1
+        case Passed = 2
+        case All = 3
+    }
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        tableView.delegate = firstTableViewDelegate
+        tableView.dataSource = firstTableViewDelegate
+        tableView.allowsMultipleSelectionDuringEditing = false
+        
+        rightTableView.delegate = secondTableViewDelegate
+        rightTableView.dataSource = secondTableViewDelegate
+        rightTableView.allowsMultipleSelectionDuringEditing = false
+    }
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         firstTableViewDelegate = TableViewDelegate(coder: aDecoder)
@@ -27,11 +47,12 @@ class ViewController: ContextViewController {
         
     }
     
+    /* filterControlSelected
+     * Handels filterControl select event and will reload all runs.
+     *
+     * Authors: Samuel Eklund, David Karlsson. */
     @IBAction func filterControlSelected(sender: AnyObject) {
-        
-        
-            reloadRuns()
-        
+        reloadRuns()
     }
     
     /*
@@ -59,46 +80,18 @@ class ViewController: ContextViewController {
         self.rightTableView.reloadData()
     }
     
-    enum FilterType: Int {
-        case Scheduled = 0
-        case Completed = 1
-        case Passed = 2
-        case All = 3
-    }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        tableView.delegate = firstTableViewDelegate
-        tableView.dataSource = firstTableViewDelegate
-        tableView.allowsMultipleSelectionDuringEditing = false
-        
-        rightTableView.delegate = secondTableViewDelegate
-        rightTableView.dataSource = secondTableViewDelegate
-        rightTableView.allowsMultipleSelectionDuringEditing = false
-    }
-    
-    
-    
+    /* viewWillAppear
+     *
+     */
     override func viewWillAppear(animated: Bool) {
-        
         reloadRuns()
-        
     }
 
-    
-    /* Select row in table view.
-     * Displays title detail page.
+    /* prepareForSegue.
+     * prepares for navigation by initializing diffrent variables depending on end destination.
      *
-     * Author: Samuel Eklund.
-     */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //self.performSegueWithIdentifier("runDetail", sender: tableView)
-    }
-    
+     * Author: David Karlsson, Samuel Eklund. */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        
         if(segue.identifier ==  "runDetail") {
             var dvc = segue.destinationViewController as RunDetailsViewController
             var indexRow = self.tableView.indexPathForSelectedRow()?.row
