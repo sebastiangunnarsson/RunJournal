@@ -113,6 +113,10 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         {
             errs.append("Duration is required")
         }
+        if(isValidStartDate(datePicker.date)){
+            errs.append("Can't add a passed date")
+        }
+
         
         if(errs.count > 0)
         {
@@ -152,6 +156,15 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
         
     }
+    
+    /* isValidStartDate
+     * Checks if startdate is greater than now.
+     * 
+     * Author: Samuel Eklund */
+    func isValidStartDate(datePicked:NSDate) -> Bool{
+        return (datePicked.timeIntervalSinceNow < 0)
+    }
+    
     
     // Made by Sebastian Gunnarsson
     // check if anything in the default calendar collides with the given date
@@ -223,8 +236,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
             self.addRun(name, length: length, date: start, isCompleted: false, image: image, duration: duration)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
-        
+            
     }
     
     @IBAction func cancelClick(sender: AnyObject) {
