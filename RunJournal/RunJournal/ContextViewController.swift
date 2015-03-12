@@ -81,6 +81,7 @@ class ContextViewController: UIViewController {
         item.length = length
         item.isCompleted = isCompleted
         item.image = image
+        item.actualLength = 0.0
         item.duration = duration
         runs?.append(item)
         

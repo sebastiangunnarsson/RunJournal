@@ -13,6 +13,7 @@ import EventKit
 
 class RunDetailsViewController: ContextViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate {
 
+    @IBOutlet weak var actualDistanceLabel: UILabel!
     
     @IBOutlet weak var startRunButton: UIButton!
     
@@ -44,6 +45,8 @@ class RunDetailsViewController: ContextViewController,UINavigationControllerDele
         if(run!.isCompleted == true || dateHasPassed(run!.date)){
             startRunButton.enabled = false
         }
+        var outputFormat = String(format: "%.2f km", run!.actualLength.doubleValue / 1000.0)
+        actualDistanceLabel.text = "\(outputFormat)"
         
     }
     

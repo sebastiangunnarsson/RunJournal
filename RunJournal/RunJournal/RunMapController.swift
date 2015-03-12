@@ -15,14 +15,46 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startRunBtn: UIButton!
     
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     var locationManager:CLLocationManager!
     var myLocations: [CLLocation] = []
     var oldLocation:CLLocation!;
     var totalDistane:Double = 0;
     var objId:NSManagedObjectID?
 
+    var timer:NSTimer?
+    var start:NSDate?
+    
     var allRuns:[Run]!
     var run:Run!
+    
+    func timeFormat(since:NSDate) -> String {
+        
+        var timePassed = Int(NSDate().timeIntervalSinceDate(since))
+        
+        var hourStr:String = "", minStr:String = "", secStr:String = ""
+        
+        var mins = timePassed / 60
+        var hours = mins / 60
+        var seconds = timePassed % 60
+        
+        if(hours > 0) {
+            hourStr = "\(hours) h"
+        }
+        
+        if(mins > 0 || (mins == 0 && hours > 1)) {
+            minStr = "\(mins) m"
+        }
+        
+        return "Elapsed time: " + hourStr + " " + minStr + " \(seconds) s"
+        
+    }
+    
+    func update() {
+        timeLabel.text = timeFormat(start!)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +62,8 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         mapView.showsUserLocation = true
         mapView.showsBuildings = true
         createLocationManager()
+        
+        
         
         allRuns = getEntities("Run") as [Run]
         run = getRunByObjectId(objId!)
@@ -119,6 +153,8 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
         {
             myLocations.append(currentLocation)
             
+            
+            
             mapView.setCenterCoordinate(currentLocation.coordinate, animated: true)
             
             var newRegion = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
@@ -141,6 +177,7 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
                 let delta: Double = myLocations[destinationIndex].distanceFromLocation(myLocations[sourceIndex])
                 totalDistane += delta
             }
+            distanceLabel.text = String(format: "Distance:          %.2f km", totalDistane / 1000.0)
         }
     }
     
@@ -154,8 +191,12 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
             startRunBtn.setTitle("End run session", forState: UIControlState.Normal)
             startRunBtn.backgroundColor = UIColor.cyanColor()
             locationManager.startUpdatingLocation()
+            start = NSDate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+            
         }else if startRunBtn.titleLabel?.text == "End run session" {
             startRunBtn.setTitle("Start run session", forState: UIControlState.Normal)
+            timer?.invalidate()
             showSaveDialog()
         }
     }
@@ -188,6 +229,7 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
             locationManager.stopUpdatingLocation()
             startRunBtn.hidden = true
             run.isCompleted = true
+            run.actualLength = totalDistane
             saveEntities()
             break
         case 1:
@@ -213,8 +255,12 @@ class RunMapController: ContextViewController, CLLocationManagerDelegate, MKMapV
             newItem.run = run
             locationArray.addObject(newItem)
         }
+        
+        
         saveEntities()
     }
+    
+ 
     
     /* mapView(MKMapView!, MKOverlay!) -> MKOverlayRenderer!
      * Returns polylineRender that will be used when printing line on map.
