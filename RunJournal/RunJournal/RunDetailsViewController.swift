@@ -53,6 +53,9 @@ class RunDetailsViewController: ContextViewController,UINavigationControllerDele
         
     }
     
+    /*
+        Makes sure editing 
+    */
     override func viewWillAppear(animated: Bool) {
         run = getRunByObjectId(self.objId!)
         if(run!.isCompleted == true || dateHasPassed(run!.date)) {

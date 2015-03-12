@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M5B-VQ-OHf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -366,18 +366,18 @@
                                 <exclude reference="npo-vk-3H5"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Nr7-aa-I1v"/>
+                                <exclude reference="ww5-xY-HCd"/>
+                                <exclude reference="3fQ-c8-xBs"/>
+                                <exclude reference="IUv-7o-pbk"/>
+                                <exclude reference="gZq-b2-0t1"/>
                                 <exclude reference="94o-qf-dIa"/>
                                 <exclude reference="Vk5-dd-dex"/>
                                 <exclude reference="t0W-3B-FaO"/>
                                 <exclude reference="xo1-cO-p4Z"/>
-                                <exclude reference="3fQ-c8-xBs"/>
-                                <exclude reference="IUv-7o-pbk"/>
-                                <exclude reference="gZq-b2-0t1"/>
                                 <exclude reference="OLa-Y0-Iu8"/>
                                 <exclude reference="SAQ-wW-IiI"/>
                                 <exclude reference="V4n-pX-V8V"/>
-                                <exclude reference="Nr7-aa-I1v"/>
-                                <exclude reference="ww5-xY-HCd"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -387,6 +387,11 @@
                                 <include reference="npo-vk-3H5"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Nr7-aa-I1v"/>
+                                <include reference="ww5-xY-HCd"/>
+                                <include reference="3fQ-c8-xBs"/>
+                                <include reference="IUv-7o-pbk"/>
+                                <include reference="gZq-b2-0t1"/>
                                 <exclude reference="1lQ-Ek-FQZ"/>
                                 <include reference="94o-qf-dIa"/>
                                 <exclude reference="I4R-VV-ijP"/>
@@ -395,14 +400,9 @@
                                 <exclude reference="WqG-CG-7ag"/>
                                 <include reference="t0W-3B-FaO"/>
                                 <include reference="xo1-cO-p4Z"/>
-                                <include reference="3fQ-c8-xBs"/>
-                                <include reference="IUv-7o-pbk"/>
-                                <include reference="gZq-b2-0t1"/>
                                 <include reference="OLa-Y0-Iu8"/>
                                 <include reference="SAQ-wW-IiI"/>
                                 <include reference="V4n-pX-V8V"/>
-                                <include reference="Nr7-aa-I1v"/>
-                                <include reference="ww5-xY-HCd"/>
                             </mask>
                         </variation>
                     </view>

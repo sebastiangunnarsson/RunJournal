@@ -18,7 +18,10 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         runs = getEntities("Run")
     }
     
-    // load correct data from filtering
+    /* reloadRuns
+     * Reloads different runs depending on filtering.
+     *
+     * Authors: Samuel Eklund, David Kalrsson. */
     func reloadRuns(val:Int) {
         
         lastFilter = val
@@ -47,14 +50,17 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         case All = 3
     }
     
+    // By Viktor Roos
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return runs!.count
     }
     
+    // By Viktor Roos
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
+    // By Viktor Roos
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if(editingStyle == UITableViewCellEditingStyle.Delete) {
@@ -68,6 +74,7 @@ class TableViewDelegate: ContextViewController , UITableViewDelegate,UITableView
         
     }
     
+    // By Viktor Roos
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RunTableCell", forIndexPath: indexPath) as RunTableCell
         

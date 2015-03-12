@@ -2,7 +2,7 @@
 //  ContextViewController.swift
 //  RunJournal
 //
-//  This class will handle the communication against core data
+//  This class handles the communication against core data
 //
 //  Created by David Karlsson on 2015-01-27.
 //  Copyright (c) 2015 David Karlsson. All rights reserved.
@@ -31,10 +31,13 @@ class ContextViewController: UIViewController {
     // Hämtar ett objekt genom dess id.
     // ID:t från en löptur får man genom följande, givet att man har en löptur
     // getRunByObjectId ( myRunObject.objectId )
+    // By David Karlsson
     func getRunByObjectId(objectId:NSManagedObjectID) -> Run {
         return manageContext.objectWithID(objectId) as Run
     }
     
+    
+    // By Viktor Roos
     func deleteRun(run: NSManagedObject, lastFilter:Int) {
         manageContext.deleteObject(run)
         saveEntities()
@@ -64,6 +67,7 @@ class ContextViewController: UIViewController {
     }
     
     // Skapar ett datumobjekt från komponenter
+    // By David Karlsson
     func createDate(year:Int, month:Int, day:Int, hour:Int, minute:Int, second:Int) -> NSDate? {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         var components = NSDateComponents()
@@ -80,6 +84,7 @@ class ContextViewController: UIViewController {
     // Hämtar alla datumkomponenter från ett datumobjekt (Exempelvis år, månad, dag etc)
     // Komponenter från dagens datum får man genom följande:
     // var currentDateComponents = getComponentsFromDate( NSDate() )
+    // By David Karlsson
     func getComponentsFromDate(date:NSDate) -> NSDateComponents? {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         
@@ -107,6 +112,7 @@ class ContextViewController: UIViewController {
     }
     
     // Hämtar alla avklarade löprundor
+    // By David Karlsson
     func getCompletedRuns() -> [Run] {
         var allRuns = getEntities("Run")
         var result = [Run]()
@@ -123,6 +129,7 @@ class ContextViewController: UIViewController {
     }
     
     // Hämtar alla icke avklarade löprundor
+    // By David Karlsson
     func getScheduledRuns() -> [Run] {
         
         var allRuns = getEntities("Run")
@@ -138,6 +145,7 @@ class ContextViewController: UIViewController {
         return result
     }
     
+    // By David Karlsson
     func getPassedRuns() -> [Run] {
         var allRuns = getEntities("Run")
         var result = [Run]()
@@ -153,22 +161,17 @@ class ContextViewController: UIViewController {
     }
     
     // Check whether the date has passed
+    // By David Karlsson
     func dateHasPassed(date:NSDate) -> Bool {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         
         return (date.timeIntervalSinceNow < 0)
-        
-        /*
-        if( date.compare(date) == NSComparisonResult.OrderedAscending && calendar?.isDateInToday(date) == false) {
-                return true
-        }
-        return false
-        */
     }
     
     
     
     // Hämtar alla inkommande löpturer (Idag och framåt)
+    // By David Karlsson
     func getUpcomingScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         runs = getEntities("Run")
@@ -189,6 +192,7 @@ class ContextViewController: UIViewController {
     }
     
     // Hämtar alla föregående löpturer (Igår och bakåt)
+    // By David Karlsson
     func getPreviouslyScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         
@@ -208,6 +212,7 @@ class ContextViewController: UIViewController {
     }
     
     // Hämtar alla löpturer för idag
+    // By David Karlsson
     func getTodaysScheduledRuns() -> [Run] {
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
         
@@ -224,9 +229,9 @@ class ContextViewController: UIViewController {
         return result
     }
     
-    // Hämtar alla entities from en viss tabell (som en array av NSManagedObjects)
-    // Vill man ha alla objekt från tabellen Run så kör man bara följande:
-    // var runs = getEntities("Run") as [Run]
+    
+    // By David Karlsson
+    // Fetches all Run-objects from CoreData
     func getEntities(entityName:String) -> [Run] {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         
@@ -250,7 +255,7 @@ class ContextViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // Sparar alla ändringar till Contexten
+    // Saves all changes to objects fetched by the context
     func saveEntities() {
         manageContext.save(nil)
     }

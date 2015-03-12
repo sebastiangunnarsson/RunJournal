@@ -116,9 +116,6 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         }
 
         
-        if(datePicker.date.timeIntervalSinceNow < 0){
-            errs.append("Date has passed")
-        }
         
         if(errs.count > 0)
         {
@@ -183,7 +180,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
                 if(granted) && (error == nil) {
                     println("granted")
                     
-                    // kollar om använder vill se om löprundan krockar med tillagda events
+                    // switch if the event should be checked for collision in calendar
                     if(self.calendarCollisionSwitch.enabled && self.calendarCollisionSwitch.on) {
                         
                         var collides:Bool = true;

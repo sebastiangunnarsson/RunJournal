@@ -85,27 +85,6 @@ class ViewController: ContextViewController {
         self.rightTableView.reloadData()
     }
     
-    enum FilterType: Int {
-        case Scheduled = 0
-        case Completed = 1
-        case Passed = 2
-        case All = 3
-    }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        // sets delegate and datasource to the tableviews
-        tableView.delegate = firstTableViewDelegate
-        tableView.dataSource = firstTableViewDelegate
-        tableView.allowsMultipleSelectionDuringEditing = false
-        
-        rightTableView.delegate = secondTableViewDelegate
-        rightTableView.dataSource = secondTableViewDelegate
-        rightTableView.allowsMultipleSelectionDuringEditing = false
-    }
-    
     
     
     override func viewWillAppear(animated: Bool) {
