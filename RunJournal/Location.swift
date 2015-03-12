@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 class Location: NSManagedObject {
-
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
     @NSManaged var timestamp: NSNumber

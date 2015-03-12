@@ -33,7 +33,7 @@ class DataManager {
      * Else error message is stored in error param.
      *
      * Author: Samuel Eklund
-     * Date: 2015-02-27
+     * Date: 2015-02-07
      */
     class func loadDataFromURL(url: NSURL, completion:(data: NSData?, error: NSError?) -> Void) {
         var session = NSURLSession.sharedSession()

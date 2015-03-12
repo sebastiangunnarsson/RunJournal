@@ -25,6 +25,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+/* Added by Samuel Eklund.
+ * Makes JSON parsing alot more easy.
+ *
+ */
+
 import Foundation
 
 let SwiftyJSONErrorDomain = "SwiftyJSONErrorDomain"

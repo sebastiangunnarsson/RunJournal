@@ -34,7 +34,8 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        openWeather.test()
+        // Loads weatherData.
+        openWeather.loadWeatherData()
         // Do any additional setup after loading the view.
         calendarCollisionLabel.textColor = UIColor(red: 0, green: 0, blue:0, alpha: 0.1)
         weatherDescLabel.text = ""
@@ -73,15 +74,21 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         }
     }
     
+    /* datePickerChange()
+     * Handles datePicker change event.
+     * If valid weather data excists for selected date, image will be featched from openWeatherApi.
+     *
+     * Author: Samuel Eklund */
     @IBAction func datePickerChange(sender: AnyObject) {
-        var date = NSDate()
         
+        var date = NSDate()
         var weatherIndex = datePicker.date.hoursFrom(date) / 24
         
+        // Checks if weather data excists for current date.
         if(weatherIndex < openWeather.weatherList.count && weatherIndex >= 0){
-            weatherDescLabel.text = openWeather.weatherList[weatherIndex].weather["description"]
+            weatherDescLabel.text = openWeather.weatherList[weatherIndex].weather["description"]! + " , " + "\(Int(openWeather.weatherList[weatherIndex].temp)) °C"
+    
             var iconName = openWeather.weatherList[weatherIndex].weather["icon"]
-
             
             if let checkedUrl = NSURL(string: "http://openweathermap.org/img/w/" + iconName! + ".png") {
                 downloadImage(checkedUrl)
@@ -90,7 +97,6 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
             weatherDescLabel.text = "N/A"
             imageURL.image = nil
         }
-        println(datePicker.date.hoursFrom(date) / 24)
     }
     
     
@@ -105,6 +111,10 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         if(durationTextField.text.isEmpty){
             errs.append("Duration is required")
         }
+        if(isValidStartDate(datePicker.date)){
+            errs.append("Can't add a passed date")
+        }
+
         
         if(datePicker.date.timeIntervalSinceNow < 0){
             errs.append("Date has passed")
@@ -148,6 +158,15 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         
         
     }
+    
+    /* isValidStartDate
+     * Checks if startdate is greater than now.
+     * 
+     * Author: Samuel Eklund */
+    func isValidStartDate(datePicked:NSDate) -> Bool{
+        return (datePicked.timeIntervalSinceNow < 0)
+    }
+    
     
     // Made by Sebastian Gunnarsson
     // check if anything in the default calendar collides with the given date
@@ -219,8 +238,7 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
             self.addRun(name, length: length, date: start, isCompleted: false, image: image, duration: duration)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
-        
+            
     }
     
     @IBAction func cancelClick(sender: AnyObject) {
@@ -301,21 +319,26 @@ class AddRunViewController: ContextViewController,UINavigationControllerDelegate
         }
     }
     
-    /*Image download*/
+    /* downloadImage()
+     * Downloads weatherIcon from openweather.
+     *
+     * Author: Samuel Eklund */
+    func downloadImage(url:NSURL){
+        getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.imageURL.image = UIImage(data: data!)
+            }
+        }
+    }
+    
+    /* getDataFromUrl()
+     * Featches data from url in background.
+     *
+     * Author Samuel Eklund */
     func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
             completion(data: NSData(data: data))
             }.resume()
-    }
-    
-    func downloadImage(url:NSURL){
-        println("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
-        getDataFromUrl(url) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                println("Finished downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
-                self.imageURL.image = UIImage(data: data!)
-            }
-        }
     }
     
 }
